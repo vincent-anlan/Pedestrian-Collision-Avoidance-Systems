@@ -3,8 +3,13 @@ import 'package:flutter/services.dart';
 import './homepage.dart';
 import './detectpage.dart';
 import 'videopage.dart';
+import 'package:camera/camera.dart';
+List<CameraDescription> cameras;
+
  Future main() async {
-    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    await SystemChrome.setPreferredOrientations([  DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft]);
+    cameras = await availableCameras();
     runApp(new MyApp());
   }
 
@@ -20,7 +25,7 @@ class MyApp extends StatelessWidget {
       home: HomePage(),
       routes: {
       // '/': (context) => HomePage(),
-      '/detect': (context) => DetectPage(),
+      '/detect': (context) => DetectPage(cameras),
       '/video': (context) => VideoPage(),
       },
       debugShowCheckedModeBanner: false
