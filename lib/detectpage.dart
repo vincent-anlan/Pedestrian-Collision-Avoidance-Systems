@@ -42,6 +42,29 @@ class _DetectPageState extends State<DetectPage> {
     }
     return Row(
       children:[
+        TextFormField(
+          validator: (value) {
+            if (value.isEmpty) {
+              return 'Please enter some text';
+            }
+            return null;
+          },
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16.0),
+          child: RaisedButton(
+            onPressed: () {
+              // Validate returns true if the form is valid, or false
+              // otherwise.
+              if (1==1) {
+                // If the form is valid, display a Snackbar.
+                Scaffold.of(context)
+                    .showSnackBar(SnackBar(content: Text('Processing Data')));
+              }
+            },
+            child: Text('Submit'),
+          ),
+        ),
         RotatedBox(
             quarterTurns: 3,
             child: AspectRatio(
@@ -49,6 +72,7 @@ class _DetectPageState extends State<DetectPage> {
               controller.value.aspectRatio,
               child: CameraPreview(controller))
         ),
+
         Expanded(
           child: Container(
             width: 40,
