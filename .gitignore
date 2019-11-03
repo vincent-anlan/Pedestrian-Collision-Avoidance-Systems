@@ -89,3 +89,5 @@ Temporary Items
 **/android/key.properties
 *.jks
 **/android/.gradle/
+fileHashes.bin
+fileHashes.lock
