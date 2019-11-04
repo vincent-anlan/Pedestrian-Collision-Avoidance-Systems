@@ -16,6 +16,8 @@ class DetectPage extends StatefulWidget {
 
 class _DetectPageState extends State<DetectPage> {
   CameraController controller;
+  final _vController = TextEditingController();
+  final _aController = TextEditingController();
 
   @override
   void initState() {
@@ -27,6 +29,8 @@ class _DetectPageState extends State<DetectPage> {
       }
       setState(() {});
     });
+    _vController.addListener(_printv);
+    _aController.addListener(_printa);
   }
 
   @override
@@ -35,6 +39,18 @@ class _DetectPageState extends State<DetectPage> {
     super.dispose();
   }
 
+  _printv() {
+    print("velocity is : ${_vController.text}");
+  }
+  _printa() {
+    print("acceleration is : ${_aController.text}");
+  }
+
+  _calculate(){
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
     if (!controller.value.isInitialized) {
@@ -42,6 +58,18 @@ class _DetectPageState extends State<DetectPage> {
     }
     return Row(
       children:[
+        /*
+          Column(
+          children: <Widget>[
+            TextFormField(controller: _vController,),
+            TextFormField(controller: _aController,),
+            RaisedButton(
+              onPressed: _calculate,
+                  child: Text('Login'),
+          )
+          ],
+          ),
+
         TextFormField(
           validator: (value) {
             if (value.isEmpty) {
@@ -65,6 +93,7 @@ class _DetectPageState extends State<DetectPage> {
             child: Text('Submit'),
           ),
         ),
+        */
         RotatedBox(
             quarterTurns: 3,
             child: AspectRatio(
