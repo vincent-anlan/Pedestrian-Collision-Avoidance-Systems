@@ -22,7 +22,7 @@ dependencies:
 
   video_player:
 
-  camera:
+  camera: ^0.5.6+3
 
   tflite: 1.0.4
 

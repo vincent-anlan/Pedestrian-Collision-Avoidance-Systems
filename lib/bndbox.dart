@@ -27,18 +27,17 @@ class BndBox extends StatelessWidget {
 
         // save data
         var label = re["detectedClass"];
-        var confidence = re["confidenceInClass"] * 100;
+        var confidence = re["confidenceInClass"];
         // print('movieTitle: $label');
+        var threshold = 0.5;
         if (new DateTime.now().second % 3 == 0 &&
             label == "person" &&
-            confidence >= 60) {
+            confidence >= threshold) {
           var distance = STD(_h, _w, _x);
-          debugPrint(
-              'person detected!!!\nx: $_x, y: $_y, w: $_w, h: $_h\n confidence: $confidence\ndistance: $distance');
-          // debugPrint(
-          //     'x: $_x, y: $_y, w: $_w, h: $_h\n confidence: $confidence');
-          // // debugPrint('now: $now.second.round()');
-          // debugPrint('distance: $distance');
+          debugPrint('person detected!!!');
+          debugPrint('x: $_x, y: $_y, w: $_w, h: $_h, confidence: $confidence');
+          // debugPrint('now: $now.second.round()');
+          debugPrint('distance: $distance');
           // debugPrint(new DateFormat("H:m:s").format(now));
         }
 
