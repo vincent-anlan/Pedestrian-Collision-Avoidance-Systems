@@ -1,69 +1,132 @@
 import 'package:flutter/material.dart';
 
+Color ccolor = Colors.green;
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final appTitle = 'Predicted time Demo';
+
     return MaterialApp(
-      title: 'Retrieve Text Input',
-      home: MyCustomForm(),
+      title: appTitle,
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text(appTitle),
+        ),
+        body: MyCustomForm(),
+        backgroundColor: Colors.white,
+      ),
     );
   }
 }
 
-// Define a custom Form widget.
+// Create a Form widget.
 class MyCustomForm extends StatefulWidget {
   @override
-  _MyCustomFormState createState() => _MyCustomFormState();
+  MyCustomFormState createState() {
+    return MyCustomFormState();
+  }
 }
 
-// Define a corresponding State class.
-// This class holds data related to the Form.
-class _MyCustomFormState extends State<MyCustomForm> {
-  // Create a text controller and use it to retrieve the current value
-  // of the TextField.
-  final myController = TextEditingController();
+// Create a corresponding State class.
+// This class holds data related to the form.
+class MyCustomFormState extends State<MyCustomForm> {
+  // Create a global key that uniquely identifies the Form widget
+  // and allows validation of the form.
+  //
+  // Note: This is a GlobalKey<FormState>,
+  // not a GlobalKey<MyCustomFormState>.
+  final _formKey = GlobalKey<FormState>();
+  double v = 0;
+  double a = 0;
+  double distance = 0;
+  double t = 0;
+  TextEditingController _cv ;
+  TextEditingController _ca ;
+  TextEditingController _cd ;
 
   @override
   void initState() {
+    _cv = new TextEditingController();
+    _ca = new TextEditingController();
+    _cd = new TextEditingController();
     super.initState();
-
-    myController.addListener(_printLatestValue);
-  }
-
-  @override
-  void dispose() {
-    // Clean up the controller when the widget is removed from the widget tree.
-    // This also removes the _printLatestValue listener.
-    myController.dispose();
-    super.dispose();
-  }
-
-  _printLatestValue() {
-    print("Second text field: ${myController.text}");
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Retrieve Text Input'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: <Widget>[
-            TextField(
-              onChanged: (text) {
-                print("First text field: $text");
+    // Build a Form widget using the _formKey created above.
+    return Form(
+      key: _formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          TextFormField(
+            controller: _cv,
+            validator: (value) {
+              if (value.isEmpty) {
+                return 'Please enter some v';
+              }
+              v = double.parse(value);
+              return null;
+            },
+
+          ),
+          TextFormField(
+            controller: _ca,
+            validator: (value) {
+              if (value.isEmpty) {
+                return 'Please enter some a';
+              }
+              a = double.parse(value);
+
+              return null;
+            },
+          ),
+          TextFormField(
+            controller: _cd,
+            validator: (value) {
+              if (value.isEmpty) {
+                return 'Please enter some d';
+              }
+              distance = double.parse(value);
+              return null;
+            },
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            child: RaisedButton(
+              onPressed: () {
+                setState(() {
+                  v = double.parse(_cv.text);
+                  a = double.parse(_ca.text);
+                  distance = double.parse(_cd.text);
+                  t = distance / v + a / 13;
+                  if(t<3){
+                    ccolor = Colors.red;
+                  }else if(t < 4){
+                    ccolor = Colors.yellow;
+                  }else{
+                    ccolor = Colors.green;
+                  }
+                });
+
+
               },
+              child: Text('Update'),
             ),
-            TextField(
-              controller: myController,
-            ),
-          ],
-        ),
+          ),
+          Text("v : $v"),
+          Text("a : $a"),
+          Text("d : $distance"),
+          Text("t : $t"),
+          Container(
+            height: 24,
+            color: ccolor,
+          ),
+        ],
       ),
     );
   }
