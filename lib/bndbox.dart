@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:road_hackers/dectionmsg.dart';
 import 'dart:math' as math;
 import 'models.dart';
 import 'package:flutter/foundation.dart';
@@ -11,9 +12,10 @@ class BndBox extends StatelessWidget {
   final double screenH;
   final double screenW;
   final String model;
+  final DetectionNotifier _text;
 
   BndBox(this.results, this.previewH, this.previewW, this.screenH, this.screenW,
-      this.model);
+      this.model, this._text);
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +36,8 @@ class BndBox extends StatelessWidget {
             label == "person" &&
             confidence >= threshold) {
           var distance = STD(_h, _w, _x);
+          String msg = 'person detected!' + ' Distance: $distance';
+          _text.changeDectionMsg(msg);
           debugPrint('person detected!!!');
           debugPrint('x: $_x, y: $_y, w: $_w, h: $_h, confidence: $confidence');
           // debugPrint('now: $now.second.round()');

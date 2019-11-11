@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/services.dart';
+import 'package:road_hackers/dectionmsg.dart';
 import 'package:tflite/tflite.dart';
 
 import 'bndbox.dart';
@@ -22,6 +23,7 @@ class _DetectPageState extends State<DetectPage> {
   int _imageHeight = 0;
   int _imageWidth = 0;
   String _model = "SSD MobileNet";
+  final DetectionNotifier _text = DetectionNotifier("No people detected!");
 
   @override
   void initState() {
@@ -111,6 +113,7 @@ class _DetectPageState extends State<DetectPage> {
             screen.height,
             screen.width,
             _model,
+            _text,
           ),
         ],
       ),
