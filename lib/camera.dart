@@ -66,6 +66,7 @@ class _CameraState extends State<Camera> {
                 bytesList: img.planes.map((plane) {
                   return plane.bytes;
                 }).toList(),
+                // bytesList: dealImage(img.planes),
                 imageHeight: img.height,
                 imageWidth: img.width,
                 numResults: 2,
@@ -80,14 +81,13 @@ class _CameraState extends State<Camera> {
             } else {
               print(img.height);
               Tflite.detectObjectOnFrame(
-                bytesList: img.planes.map((plane) {
-                  // print(plane.bytes);
-                  // print(plane.width);
-                  return plane.bytes;
-                }).toList(),
+                // bytesList: img.planes.map((plane) {
+                //   return plane.bytes;
+                // }).toList(),
+                bytesList: dealImage(img.planes),
                 model: widget.model == yolo ? "YOLO" : "SSDMobileNet",
-                imageHeight: img.height,
-                imageWidth: img.width,
+                imageHeight: img.width,
+                imageWidth: img.height,
                 imageMean: widget.model == yolo ? 0 : 128,
                 imageStd: widget.model == yolo ? 255.0 : 127,
                 numResultsPerClass: 1,
@@ -142,10 +142,13 @@ class _CameraState extends State<Camera> {
     );
   }
 
-  // dealImage(List<Plane> planes) {
-  //   return planes.map((plane) {
-  //     return Ig.copyRotate(Ig.Image.fromBytes(1080, 720, plane.bytes), 90)
-  //         .getBytes();
-  //   }).toList();
-  // }
+  dealImage(List<Plane> planes) {
+    return planes.map((plane) {
+      // print(Ig.copyRotate(Ig.Image.fromBytes(1080, 720, plane.bytes), 90)
+      //     .getBytes());
+      return Ig.copyRotate(
+              Ig.Image.fromBytes(plane.width, plane.height, plane.bytes), 270)
+          .getBytes();
+    }).toList();
+  }
 }

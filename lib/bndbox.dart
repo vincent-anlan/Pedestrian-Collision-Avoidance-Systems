@@ -36,7 +36,7 @@ class BndBox extends StatelessWidget {
           var distance = STD(_h, _w, _x);
           String msg = '$label detected!' + ' Distance: $distance';
           _text.changeDectionMsg(msg);
-          debugPrint('person detected!!!');
+          debugPrint('$label detected!!!');
           debugPrint('x: $_x, y: $_y, w: $_w, h: $_h, confidence: $confidence');
           // debugPrint('now: $now.second.round()');
           debugPrint('distance: $distance');

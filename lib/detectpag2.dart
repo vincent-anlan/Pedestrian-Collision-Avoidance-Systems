@@ -52,8 +52,8 @@ class _DetectPage2State extends State<DetectPage2> {
           ),
           BndBox(
             _recognitions == null ? [] : _recognitions,
-            math.min(_imageHeight, _imageWidth),
             math.max(_imageHeight, _imageWidth),
+            math.min(_imageHeight, _imageWidth),
             screen.height,
             screen.width,
             _model,

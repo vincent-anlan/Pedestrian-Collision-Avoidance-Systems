@@ -54,8 +54,7 @@ class _DetectPageState extends State<DetectPage> {
 
   loadModel() async {
     String res = await Tflite.loadModel(
-        model: "assets/ssd_mobilenet.tflite",
-        labels: "assets/ssd_mobilenet.txt");
+        model: "assets/detect.tflite", labels: "assets/detect.txt");
     print(res);
   }
 
