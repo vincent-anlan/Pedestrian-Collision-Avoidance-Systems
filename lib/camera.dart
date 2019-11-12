@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+
+import 'package:image/image.dart' as Ig;
 import 'package:tflite/tflite.dart';
 import 'dart:math' as math;
 import 'models.dart';
@@ -30,7 +32,7 @@ class _CameraState extends State<Camera> {
     } else {
       controller = new CameraController(
         widget.cameras[0],
-        ResolutionPreset.medium,
+        ResolutionPreset.high,
       );
       controller.initialize().then((_) {
         if (!mounted) {
@@ -41,7 +43,6 @@ class _CameraState extends State<Camera> {
         controller.startImageStream((CameraImage img) {
           if (!isDetecting) {
             isDetecting = true;
-
             int startTime = new DateTime.now().millisecondsSinceEpoch;
 
             if (widget.model == mobilenet) {
@@ -77,17 +78,20 @@ class _CameraState extends State<Camera> {
                 isDetecting = false;
               });
             } else {
+              print(img.height);
               Tflite.detectObjectOnFrame(
                 bytesList: img.planes.map((plane) {
+                  // print(plane.bytes);
+                  // print(plane.width);
                   return plane.bytes;
                 }).toList(),
                 model: widget.model == yolo ? "YOLO" : "SSDMobileNet",
                 imageHeight: img.height,
                 imageWidth: img.width,
-                imageMean: widget.model == yolo ? 0 : 127.5,
-                imageStd: widget.model == yolo ? 255.0 : 127.5,
+                imageMean: widget.model == yolo ? 0 : 128,
+                imageStd: widget.model == yolo ? 255.0 : 127,
                 numResultsPerClass: 1,
-                threshold: widget.model == yolo ? 0.2 : 0.4,
+                threshold: widget.model == yolo ? 0.2 : 0.5,
               ).then((recognitions) {
                 int endTime = new DateTime.now().millisecondsSinceEpoch;
                 // print("Detection took ${endTime - startTime}");
@@ -116,20 +120,32 @@ class _CameraState extends State<Camera> {
     }
 
     var tmp = MediaQuery.of(context).size;
-    var screenH = math.max(tmp.height, tmp.width);
-    var screenW = math.min(tmp.height, tmp.width);
+    var screenH = math.min(tmp.height, tmp.width);
+    var screenW = math.max(tmp.height, tmp.width);
     tmp = controller.value.previewSize;
-    var previewH = math.max(tmp.height, tmp.width);
-    var previewW = math.min(tmp.height, tmp.width);
+    var previewH = math.min(tmp.height, tmp.width);
+    var previewW = math.max(tmp.height, tmp.width);
     var screenRatio = screenH / screenW;
     var previewRatio = previewH / previewW;
 
-    return OverflowBox(
-      maxHeight:
-          screenRatio > previewRatio ? screenH : screenW / previewW * previewH,
-      maxWidth:
-          screenRatio > previewRatio ? screenH / previewH * previewW : screenW,
-      child: CameraPreview(controller),
+    return RotatedBox(
+      quarterTurns: 3,
+      child: OverflowBox(
+        maxHeight: screenRatio > previewRatio
+            ? screenH / previewH * previewW
+            : screenW,
+        maxWidth: screenRatio > previewRatio
+            ? screenH
+            : screenW / previewW * previewH,
+        child: CameraPreview(controller),
+      ),
     );
   }
+
+  // dealImage(List<Plane> planes) {
+  //   return planes.map((plane) {
+  //     return Ig.copyRotate(Ig.Image.fromBytes(1080, 720, plane.bytes), 90)
+  //         .getBytes();
+  //   }).toList();
+  // }
 }

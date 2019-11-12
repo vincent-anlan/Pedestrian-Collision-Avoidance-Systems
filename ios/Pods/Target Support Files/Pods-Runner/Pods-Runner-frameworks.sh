@@ -161,17 +161,17 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "${PODS_ROOT}/../.symlinks/flutter/ios/Flutter.framework"
+  install_framework "${PODS_ROOT}/../Flutter/Flutter.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/camera/camera.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/video_player/video_player.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "${PODS_ROOT}/../.symlinks/flutter/ios/Flutter.framework"
+  install_framework "${PODS_ROOT}/../Flutter/Flutter.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/camera/camera.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/video_player/video_player.framework"
 fi
 if [[ "$CONFIGURATION" == "Profile" ]]; then
-  install_framework "${PODS_ROOT}/../.symlinks/flutter/ios/Flutter.framework"
+  install_framework "${PODS_ROOT}/../Flutter/Flutter.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/camera/camera.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/video_player/video_player.framework"
 fi

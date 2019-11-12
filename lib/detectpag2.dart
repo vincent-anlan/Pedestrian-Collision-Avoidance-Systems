@@ -52,38 +52,33 @@ class _DetectPage2State extends State<DetectPage2> {
           ),
           BndBox(
             _recognitions == null ? [] : _recognitions,
-            math.max(_imageHeight, _imageWidth),
             math.min(_imageHeight, _imageWidth),
+            math.max(_imageHeight, _imageWidth),
             screen.height,
             screen.width,
             _model,
             _text,
           ),
           new Positioned(
-              child: new Align(
+            child: new Align(
                 alignment: FractionalOffset.bottomCenter,
-                child: 
-                ValueListenableBuilder(
-                      builder: (BuildContext context, String value, Widget child) {
-                        return new Container(
-                          child: new Text (
-                            '$value',
-                            softWrap: true,
-                            style: new TextStyle(
-                              color: Colors.white,
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.w300
-                            ),
-                          ),
-                          decoration: new BoxDecoration (
-                            color: Colors.black
-                          ),
-                          padding: new EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 16.0),
-                        );
+                child: ValueListenableBuilder(
+                  builder: (BuildContext context, String value, Widget child) {
+                    return new Container(
+                      child: new Text(
+                        '$value',
+                        softWrap: true,
+                        style: new TextStyle(
+                            color: Colors.white,
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.w300),
+                      ),
+                      decoration: new BoxDecoration(color: Colors.black),
+                      padding: new EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 16.0),
+                    );
                   },
                   valueListenable: _text,
-                )
-              ),
+                )),
           ),
         ],
       ),
@@ -92,8 +87,10 @@ class _DetectPage2State extends State<DetectPage2> {
 
   loadModel() async {
     await Tflite.loadModel(
-        model: "assets/ssd_mobilenet.tflite",
-        labels: "assets/ssd_mobilenet.txt");
+        model: "assets/detect.tflite", labels: "assets/detect.txt");
+    // await Tflite.loadModel(
+    //     model: "assets/ssd_mobilenet.tflite",
+    //     labels: "assets/ssd_mobilenet.txt");
     _model = "SSD MobileNet";
   }
 }

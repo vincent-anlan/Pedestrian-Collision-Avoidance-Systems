@@ -11,7 +11,7 @@ PODS:
 
 DEPENDENCIES:
   - camera (from `.symlinks/plugins/camera/ios`)
-  - Flutter (from `.symlinks/flutter/ios`)
+  - Flutter (from `Flutter`)
   - tflite (from `.symlinks/plugins/tflite/ios`)
   - video_player (from `.symlinks/plugins/video_player/ios`)
 
@@ -23,7 +23,7 @@ EXTERNAL SOURCES:
   camera:
     :path: ".symlinks/plugins/camera/ios"
   Flutter:
-    :path: ".symlinks/flutter/ios"
+    :path: Flutter
   tflite:
     :path: ".symlinks/plugins/tflite/ios"
   video_player:
@@ -36,6 +36,6 @@ SPEC CHECKSUMS:
   tflite: a6911f4ac99be9c73c1dcffb1a5d54b3c56087a8
   video_player: 3964090a33353060ed7f58aa6427c7b4b208ec21
 
-PODFILE CHECKSUM: 1684eb5a3603bbff42054fc5031250e7ae86cfe4
+PODFILE CHECKSUM: 1b66dae606f75376c5f2135a8290850eeb09ae83
 
 COCOAPODS: 1.8.4
