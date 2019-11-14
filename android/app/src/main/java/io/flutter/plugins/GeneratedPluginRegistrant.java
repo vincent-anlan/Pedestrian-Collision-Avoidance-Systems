@@ -2,6 +2,8 @@ package io.flutter.plugins;
 
 import io.flutter.plugin.common.PluginRegistry;
 import io.flutter.plugins.camera.CameraPlugin;
+import com.lyokone.location.LocationPlugin;
+import io.flutter.plugins.sensors.SensorsPlugin;
 import sq.flutter.tflite.TflitePlugin;
 import io.flutter.plugins.videoplayer.VideoPlayerPlugin;
 
@@ -14,6 +16,8 @@ public final class GeneratedPluginRegistrant {
       return;
     }
     CameraPlugin.registerWith(registry.registrarFor("io.flutter.plugins.camera.CameraPlugin"));
+    LocationPlugin.registerWith(registry.registrarFor("com.lyokone.location.LocationPlugin"));
+    SensorsPlugin.registerWith(registry.registrarFor("io.flutter.plugins.sensors.SensorsPlugin"));
     TflitePlugin.registerWith(registry.registrarFor("sq.flutter.tflite.TflitePlugin"));
     VideoPlayerPlugin.registerWith(registry.registrarFor("io.flutter.plugins.videoplayer.VideoPlayerPlugin"));
   }

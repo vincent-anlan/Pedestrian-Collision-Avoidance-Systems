@@ -15,14 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 FLUTTER_EXPORT
 @protocol FlutterTexture <NSObject>
 - (CVPixelBufferRef _Nullable)copyPixelBuffer;
-
-/**
- * Called when the texture is unregistered.
- *
- * Called on the GPU thread.
- */
-@optional
-- (void)onTextureUnregistered:(NSObject<FlutterTexture>*)texture;
 @end
 
 FLUTTER_EXPORT

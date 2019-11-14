@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:road_hackers/dectionmsg.dart';
+import 'package:road_hackers/sensor.dart';
 import 'package:tflite/tflite.dart';
 import 'dart:math' as math;
 
@@ -28,6 +29,7 @@ class _DetectPage2State extends State<DetectPage2> {
   void initState() {
     super.initState();
     loadModel();
+    // print("Speed:" + getSpeed().toString());
   }
 
   setRecognitions(recognitions, imageHeight, imageWidth) {
