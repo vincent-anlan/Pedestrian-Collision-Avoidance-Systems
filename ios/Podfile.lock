@@ -4,8 +4,6 @@ PODS:
   - Flutter (1.0.0)
   - location (0.0.1):
     - Flutter
-  - sensors (0.0.1):
-    - Flutter
   - TensorFlowLite (1.13.1)
   - tflite (1.0.4):
     - Flutter
@@ -17,7 +15,6 @@ DEPENDENCIES:
   - camera (from `.symlinks/plugins/camera/ios`)
   - Flutter (from `Flutter`)
   - location (from `.symlinks/plugins/location/ios`)
-  - sensors (from `.symlinks/plugins/sensors/ios`)
   - tflite (from `.symlinks/plugins/tflite/ios`)
   - video_player (from `.symlinks/plugins/video_player/ios`)
 
@@ -32,8 +29,6 @@ EXTERNAL SOURCES:
     :path: Flutter
   location:
     :path: ".symlinks/plugins/location/ios"
-  sensors:
-    :path: ".symlinks/plugins/sensors/ios"
   tflite:
     :path: ".symlinks/plugins/tflite/ios"
   video_player:
@@ -43,7 +38,6 @@ SPEC CHECKSUMS:
   camera: 38cc83ae9a5667bb5a71c7d9edaf60a91920fd4e
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   location: 3a2eed4dd2fab25e7b7baf2a9efefe82b512d740
-  sensors: 4bd31219c4bf9d7d4401b392a1701ee3adc1a296
   TensorFlowLite: 8b9dc4eb32eac0f8cb660c66bca7604da56dcc5a
   tflite: a6911f4ac99be9c73c1dcffb1a5d54b3c56087a8
   video_player: 3964090a33353060ed7f58aa6427c7b4b208ec21

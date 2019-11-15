@@ -2,7 +2,7 @@ import 'dart:math';
 import 'package:location/location.dart';
 import 'package:flutter/services.dart';
 
-Future<double> getSpeed() async{
+Future<double> getSpeed() async {
   LocationData currentLocation;
   String error;
   var location = new Location();

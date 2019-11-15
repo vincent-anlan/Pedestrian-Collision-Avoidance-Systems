@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:road_hackers/sensor.dart';
 import './homepage.dart';
 import './detectpage.dart';
 import './detectpag2.dart';
@@ -13,6 +14,7 @@ Future main() async {
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.landscapeRight]);
   cameras = await availableCameras();
+  print(await getSpeed());
   runApp(new MyApp());
 }
 
