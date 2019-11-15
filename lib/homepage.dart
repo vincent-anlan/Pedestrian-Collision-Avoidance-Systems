@@ -7,6 +7,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String value = "";
+  bool isCAMSwitched = true;
+  double _sliderValue;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,18 +26,38 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             ListTile(
-              title: Text('Item 1'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
+              title: Text('Sensility'),
+              trailing: Slider(
+                  activeColor: Colors.indigoAccent,
+                  min: 0.0,
+                  max: 15.0,
+                  onChanged: (newRating) {
+                    setState(() => _sliderValue = newRating);
+                  },
+                  value: _sliderValue,
+                ),
+              
             ),
             ListTile(
-              title: Text('Item 2'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
+              title: Text('CACHE LIMIT (MB)'),
+              trailing: TextField(
+                onChanged: (text) {
+                  value = text;
+                },
+              )
+            ),
+            ListTile(
+              title: Text('DASH CAM'),
+              trailing: Switch(
+                value: isCAMSwitched,
+                onChanged: (value) {
+                  setState(() {
+                    isCAMSwitched = value;
+                  });
+                },
+              activeTrackColor: Colors.lightBlueAccent, 
+              activeColor: Colors.blue,
+              ),
             ),
           ],
         ),
