@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:road_hackers/dectionmsg.dart';
+import 'package:road_hackers/dectionnotifier.dart';
 import 'dart:math' as math;
 import 'models.dart';
 import 'package:flutter/foundation.dart';
@@ -36,6 +36,7 @@ class BndBox extends StatelessWidget {
           var distance = STD(_h, _w, _x);
           String msg = '$label detected!' + ' Distance: $distance';
           _text.changeDectionMsg(msg);
+          _text.changeDectionColor(Colors.red);
           debugPrint('$label detected!!!');
           debugPrint('x: $_x, y: $_y, w: $_w, h: $_h, confidence: $confidence');
           // debugPrint('now: $now.second.round()');

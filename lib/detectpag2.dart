@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-import 'package:road_hackers/dectionmsg.dart';
+import 'package:road_hackers/dectionnotifier.dart';
 import 'package:road_hackers/sensor.dart';
+import 'package:road_hackers/sharabledata.dart';
 import 'package:tflite/tflite.dart';
 import 'dart:math' as math;
 
@@ -23,7 +24,7 @@ class _DetectPage2State extends State<DetectPage2> {
   int _imageHeight = 0;
   int _imageWidth = 0;
   String _model = "";
-  final DetectionNotifier _text = DetectionNotifier("No people detected!");
+  final DetectionNotifier _text = DetectionNotifier(SharableData("No people detected!", Colors.black));
 
   @override
   void initState() {
@@ -65,17 +66,17 @@ class _DetectPage2State extends State<DetectPage2> {
             child: new Align(
                 alignment: FractionalOffset.bottomCenter,
                 child: ValueListenableBuilder(
-                  builder: (BuildContext context, String value, Widget child) {
+                  builder: (BuildContext context, SharableData value, Widget child) {
                     return new Container(
                       child: new Text(
-                        '$value',
+                        '${value.displayMsg}',
                         softWrap: true,
                         style: new TextStyle(
                             color: Colors.white,
                             fontSize: 18.0,
                             fontWeight: FontWeight.w300),
                       ),
-                      decoration: new BoxDecoration(color: Colors.black),
+                      decoration: new BoxDecoration(color: value.color),
                       padding: new EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 16.0),
                     );
                   },
