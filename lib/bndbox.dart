@@ -23,35 +23,6 @@ class BndBox extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> _renderBoxes() {
       List<DetectedObject> objlist = [];
-      var label;
-      print('results');
-      print(results);
-      // results.map((re) {
-      //   print("enter here");
-      //   var _x = re["rect"]["x"];
-      //   var _w = re["rect"]["w"];
-      //   var _y = re["rect"]["y"];
-      //   var _h = re["rect"]["h"];
-      //   var label = re["detectedClass"];
-      //   var confidence = re["confidenceInClass"];
-      //   // print('movieTitle: $label');
-      //   var obj = new DetectedObject(label, _x, _w, _y, _h);
-      //   var distance = obj.distance;
-      //   String msg = '$label detected!' + ' Distance: $distance';
-      //   _text.changeDectionMsg(msg);
-
-      //   // _text.changeDectionColor(Colors.red);
-      //   debugPrint('$label detected!!!');
-      //   debugPrint('x: $_x, y: $_y, w: $_w, h: $_h, confidence: $confidence');
-      //   // debugPrint('now: $now.second.round()');
-      //   debugPrint('distance: $distance');
-      //   // debugPrint(new DateFormat("H:m:s").format(now));
-
-      //   //
-
-      //   objlist.add(obj);
-      //   return obj;
-      // });
       try {
         if (results.length != 0) {
           for (var re in results) {
@@ -72,7 +43,6 @@ class BndBox extends StatelessWidget {
             // debugPrint('now: $now.second.round()');
             debugPrint('distance: $distance');
             // debugPrint(new DateFormat("H:m:s").format(now));
-
             objlist.add(obj);
           }
         }
@@ -85,11 +55,8 @@ class BndBox extends StatelessWidget {
         speed = currentLocation.speed;
         // print('color:' +
         //     getBndboxColor(currentLocation.speed * 3.6, objlist).toString());
-        // _text.changeDectionColor(Colors.red);
       });
-      speed = 10.0;
-      //print(objlist[0].type);
-      //print('color:' + getBndboxColor(speed * 3.6, objlist).toString());
+      // speed = 10.0;
       _text.changeDectionColor(getBndboxColor(speed * 3.6, objlist));
 
       return results.map((re) {
@@ -98,13 +65,6 @@ class BndBox extends StatelessWidget {
         var _y = re["rect"]["y"];
         var _h = re["rect"]["h"];
         var scaleW, scaleH, x, y, w, h;
-        print("screenH: $screenH");
-        print("screenW: $screenW");
-        print("previewH: $previewH");
-        print("previewW: $previewW");
-        var temp = previewH;
-        previewH = previewW;
-        previewW = temp;
         if (screenH / screenW > previewH / previewW) {
           scaleW = screenH / previewH * previewW;
           scaleH = screenH;
