@@ -14,7 +14,6 @@ Future main() async {
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.landscapeRight]);
   cameras = await availableCameras();
-  print(await getSpeed());
   runApp(new MyApp());
 }
 

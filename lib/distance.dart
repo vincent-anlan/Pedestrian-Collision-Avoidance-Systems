@@ -25,21 +25,30 @@ double STD(ratioH, ratioW, coordX) {
 enum ObjectType { pedestrian, car, tram, truck, cyclist, van }
 
 class DetectedObject {
-  ObjectType type = null;
+  ObjectType type;
   double x = -1, y = -1, width = -1, height = -1;
   double distance = -1;
   double relativeSpeed = -1;
-  final double angle =  0.353717*pi;  //0.364*pi;
+  final double angle = 0.353717 * pi; //0.364*pi;
   final int resH = 2436;
   final int resW = 1125;
 
-  DetectedObject(type, x, y, width, height){
-    this.x=x;
-    this.y=y;
-    this.width=width;
-    this.height=height;
+  DetectedObject(type, x, y, width, height) {
+    Map typeMap = {
+      "pedestrian": ObjectType.pedestrian,
+      "car": ObjectType.car,
+      "tram": ObjectType.tram,
+      "truck": ObjectType.truck,
+      "cyclist": ObjectType.cyclist,
+      "van": ObjectType.van
+    };
+    this.type = typeMap[type];
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
     int size = -1;
-    this.distance=getDistance(size)[0];
+    this.distance = getDistance(size)[0];
   }
   // return [distance, angle]
   List getDistance(size) {
@@ -77,11 +86,14 @@ class DetectedObject {
     }
   }
 
-  bool isFrontVehicle(){
-    double xThreshold = 0.01;
-    double yThreshold = 0.01;
-
-    return (this.x + 0.5*this.width - 0.5).abs() <= xThreshold && (this.y + 0.5 * this. height - 0.5).abs() <= yThreshold &&
-    (this.type == ObjectType.car || this.type == ObjectType.truck || this.type == ObjectType.van);
+  bool isFrontVehicle() {
+    double xThreshold = 0.5;
+    double yThreshold = 0.5;
+    // return true;
+    return (this.x + 0.5 * this.width - 0.5).abs() <= xThreshold &&
+        (this.y + 0.5 * this.height - 0.5).abs() <= yThreshold &&
+        (this.type == ObjectType.car ||
+            this.type == ObjectType.truck ||
+            this.type == ObjectType.van);
   }
 }

@@ -79,7 +79,7 @@ class _CameraState extends State<Camera> {
                 isDetecting = false;
               });
             } else {
-              print(img.height);
+              // print(img.height);
               Tflite.detectObjectOnFrame(
                 // bytesList: img.planes.map((plane) {
                 //   return plane.bytes;
@@ -90,8 +90,8 @@ class _CameraState extends State<Camera> {
                 imageWidth: img.height,
                 imageMean: widget.model == yolo ? 0 : 128,
                 imageStd: widget.model == yolo ? 255.0 : 127,
-                numResultsPerClass: 1,
-                threshold: widget.model == yolo ? 0.2 : 0.5,
+                numResultsPerClass: 4,
+                threshold: widget.model == yolo ? 0.2 : 0.46,
               ).then((recognitions) {
                 int endTime = new DateTime.now().millisecondsSinceEpoch;
                 // print("Detection took ${endTime - startTime}");

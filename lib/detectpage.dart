@@ -24,7 +24,8 @@ class _DetectPageState extends State<DetectPage> {
   int _imageHeight = 0;
   int _imageWidth = 0;
   String _model = "SSD MobileNet";
-  final DetectionNotifier _text = DetectionNotifier(SharableData("No people detected!", Colors.black));
+  final DetectionNotifier _text =
+      DetectionNotifier(SharableData("No people detected!", Colors.black));
 
   @override
   void initState() {
@@ -56,14 +57,14 @@ class _DetectPageState extends State<DetectPage> {
   loadModel() async {
     String res = await Tflite.loadModel(
         model: "assets/detect.tflite", labels: "assets/detect.txt");
-    print(res);
+    // print(res);
   }
 
   @override
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
-    print(screen.height);
-    print(screen.width);
+    // print(screen.height);
+    // print(screen.width);
     // if (!controller.value.isInitialized) {
     //   return Container();
     // }

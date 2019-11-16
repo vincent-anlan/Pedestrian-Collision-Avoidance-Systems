@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
 import 'package:road_hackers/dectionnotifier.dart';
+import 'package:road_hackers/sensor.dart';
 import 'dart:math' as math;
 import 'models.dart';
 import 'package:flutter/foundation.dart';
@@ -7,8 +9,8 @@ import 'distance.dart';
 
 class BndBox extends StatelessWidget {
   final List<dynamic> results;
-  final int previewH;
-  final int previewW;
+  int previewH;
+  int previewW;
   final double screenH;
   final double screenW;
   final String model;
@@ -20,32 +22,89 @@ class BndBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> _renderBoxes() {
+      List<DetectedObject> objlist = [];
+      var label;
+      print('results');
+      print(results);
+      // results.map((re) {
+      //   print("enter here");
+      //   var _x = re["rect"]["x"];
+      //   var _w = re["rect"]["w"];
+      //   var _y = re["rect"]["y"];
+      //   var _h = re["rect"]["h"];
+      //   var label = re["detectedClass"];
+      //   var confidence = re["confidenceInClass"];
+      //   // print('movieTitle: $label');
+      //   var obj = new DetectedObject(label, _x, _w, _y, _h);
+      //   var distance = obj.distance;
+      //   String msg = '$label detected!' + ' Distance: $distance';
+      //   _text.changeDectionMsg(msg);
+
+      //   // _text.changeDectionColor(Colors.red);
+      //   debugPrint('$label detected!!!');
+      //   debugPrint('x: $_x, y: $_y, w: $_w, h: $_h, confidence: $confidence');
+      //   // debugPrint('now: $now.second.round()');
+      //   debugPrint('distance: $distance');
+      //   // debugPrint(new DateFormat("H:m:s").format(now));
+
+      //   //
+
+      //   objlist.add(obj);
+      //   return obj;
+      // });
+      try {
+        if (results.length != 0) {
+          for (var re in results) {
+            var _x = re["rect"]["x"];
+            var _w = re["rect"]["w"];
+            var _y = re["rect"]["y"];
+            var _h = re["rect"]["h"];
+            var label = re["detectedClass"];
+            var confidence = re["confidenceInClass"];
+            var obj = new DetectedObject(label, _x, _w, _y, _h);
+            var distance = obj.distance;
+            String msg = '$label detected!' + ' Distance: $distance';
+            _text.changeDectionMsg(msg);
+            // _text.changeDectionColor(Colors.red);
+            debugPrint('$label detected!!!');
+            debugPrint(
+                'x: $_x, y: $_y, w: $_w, h: $_h, confidence: $confidence');
+            // debugPrint('now: $now.second.round()');
+            debugPrint('distance: $distance');
+            // debugPrint(new DateFormat("H:m:s").format(now));
+
+            objlist.add(obj);
+          }
+        }
+      } catch (Exception) {
+        print("Exception rasied in for loop");
+      }
+      double speed = 0.0;
+      var location = new Location();
+      location.onLocationChanged().listen((LocationData currentLocation) {
+        speed = currentLocation.speed;
+        // print('color:' +
+        //     getBndboxColor(currentLocation.speed * 3.6, objlist).toString());
+        // _text.changeDectionColor(Colors.red);
+      });
+      speed = 10.0;
+      //print(objlist[0].type);
+      //print('color:' + getBndboxColor(speed * 3.6, objlist).toString());
+      _text.changeDectionColor(getBndboxColor(speed * 3.6, objlist));
+
       return results.map((re) {
         var _x = re["rect"]["x"];
         var _w = re["rect"]["w"];
         var _y = re["rect"]["y"];
         var _h = re["rect"]["h"];
         var scaleW, scaleH, x, y, w, h;
-
-        // save data
-        var label = re["detectedClass"];
-        var confidence = re["confidenceInClass"];
-        // print('movieTitle: $label');
-        var threshold = 0.5;
-        if (confidence >= threshold) {
-          var distance = STD(_h, _w, _x);
-          String msg = '$label detected!' + ' Distance: $distance';
-          _text.changeDectionMsg(msg);
-          _text.changeDectionColor(Colors.red);
-          debugPrint('$label detected!!!');
-          debugPrint('x: $_x, y: $_y, w: $_w, h: $_h, confidence: $confidence');
-          // debugPrint('now: $now.second.round()');
-          debugPrint('distance: $distance');
-          // debugPrint(new DateFormat("H:m:s").format(now));
-        }
-
-        //
-
+        print("screenH: $screenH");
+        print("screenW: $screenW");
+        print("previewH: $previewH");
+        print("previewW: $previewW");
+        var temp = previewH;
+        previewH = previewW;
+        previewW = temp;
         if (screenH / screenW > previewH / previewW) {
           scaleW = screenH / previewH * previewW;
           scaleH = screenH;
