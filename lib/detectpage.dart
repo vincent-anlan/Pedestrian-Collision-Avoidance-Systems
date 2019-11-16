@@ -1,49 +1,37 @@
 import 'package:flutter/material.dart';
-
 import 'package:camera/camera.dart';
-import 'package:flutter/services.dart';
 import 'package:road_hackers/dectionnotifier.dart';
+import 'package:road_hackers/sensor.dart';
 import 'package:road_hackers/sharabledata.dart';
 import 'package:tflite/tflite.dart';
-
-import 'bndbox.dart';
-import 'camera.dart';
 import 'dart:math' as math;
+
+import 'camera.dart';
+import 'bndbox.dart';
+import 'models.dart';
 
 class DetectPage extends StatefulWidget {
   final List<CameraDescription> cameras;
+
   DetectPage(this.cameras);
 
   @override
-  _DetectPageState createState() => _DetectPageState();
+  _DetectPageState createState() => new _DetectPageState();
 }
 
 class _DetectPageState extends State<DetectPage> {
-  // CameraController controller;
   List<dynamic> _recognitions;
   int _imageHeight = 0;
   int _imageWidth = 0;
-  String _model = "SSD MobileNet";
+  String _model = "";
   final DetectionNotifier _text =
       DetectionNotifier(SharableData("No people detected!", Colors.black));
 
   @override
   void initState() {
     super.initState();
-    // controller = CameraController(widget.cameras[0], ResolutionPreset.medium);
-    // controller.initialize().then((_) {
-    //   if (!mounted) {
-    //     return;
-    //   }
-    //   setState(() {});
-    // });
-  }
-
-  @override
-  Future dispose() async {
-    // controller?.dispose();
-    super.dispose();
-    await Tflite.close();
+    loadModel();
+    // print("Speed:" + getSpeed().toString());
   }
 
   setRecognitions(recognitions, imageHeight, imageWidth) {
@@ -54,51 +42,10 @@ class _DetectPageState extends State<DetectPage> {
     });
   }
 
-  loadModel() async {
-    String res = await Tflite.loadModel(
-        model: "assets/detect.tflite", labels: "assets/detect.txt");
-    // print(res);
-  }
-
   @override
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
-    // print(screen.height);
-    // print(screen.width);
-    // if (!controller.value.isInitialized) {
-    //   return Container();
-    // }
-    loadModel();
-    // return Row(children: [
-    //   RotatedBox(
-    //       quarterTurns: 3,
-    //       // child: AspectRatio(
-    //       //   aspectRatio:
-    //       //   controller.value.aspectRatio,
-    //       //   child: CameraPreview(controller))
-    //       child: Stack(
-    //         children: [
-    //           Camera(
-    //             widget.cameras,
-    //             _model,
-    //             setRecognitions,
-    //           ),
-    //           BndBox(
-    //               _recognitions == null ? [] : _recognitions,
-    //               math.max(_imageHeight, _imageWidth),
-    //               math.min(_imageHeight, _imageWidth),
-    //               screen.height,
-    //               screen.width,
-    //               _model),
-    //         ],
-    //       )),
-    //   Expanded(
-    //       child: Container(
-    //     width: 40,
-    //     color: Colors.green,
-    //   ))
-    // ]);
-    // SystemChrome.setEnabledSystemUIOverlays([]); //full screen
+    // loadModel();
     return Scaffold(
       body: Stack(
         children: [
@@ -116,8 +63,39 @@ class _DetectPageState extends State<DetectPage> {
             _model,
             _text,
           ),
+          new Positioned(
+            child: new Align(
+                alignment: FractionalOffset.bottomCenter,
+                child: ValueListenableBuilder(
+                  builder:
+                      (BuildContext context, SharableData value, Widget child) {
+                    return new Container(
+                      child: new Text(
+                        '${value.displayMsg}',
+                        softWrap: true,
+                        style: new TextStyle(
+                            color: Colors.white,
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.w300),
+                      ),
+                      color: value.color,
+                      padding: new EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 16.0),
+                    );
+                  },
+                  valueListenable: _text,
+                )),
+          ),
         ],
       ),
     );
+  }
+
+  loadModel() async {
+    await Tflite.loadModel(
+        model: "assets/detect.tflite", labels: "assets/detect.txt");
+    // await Tflite.loadModel(
+    //     model: "assets/ssd_mobilenet.tflite",
+    //     labels: "assets/ssd_mobilenet.txt");
+    _model = "SSD MobileNet";
   }
 }

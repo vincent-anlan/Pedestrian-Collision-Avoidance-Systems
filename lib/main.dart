@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:road_hackers/sensor.dart';
-import './homepage.dart';
-import './detectpage.dart';
-import './detectpag2.dart';
+// import 'package:road_hackers/sensor.dart';
+import 'homepage.dart';
+import 'detectpage.dart';
 import 'videopage.dart';
 import 'package:camera/camera.dart';
 
@@ -29,7 +28,7 @@ class MyApp extends StatelessWidget {
         home: HomePage(),
         routes: {
           // '/': (context) => HomePage(),
-          '/detect': (context) => DetectPage2(cameras),
+          '/detect': (context) => DetectPage(cameras),
           '/video': (context) => VideoPage(),
         },
         debugShowCheckedModeBanner: false);

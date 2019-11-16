@@ -9,7 +9,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String value = "";
   bool isCAMSwitched = true;
-  double _sliderValue;
+  double _sliderValue = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,9 @@ class _HomePageState extends State<HomePage> {
             ),
             ListTile(
               title: Text('Sensility'),
-              trailing: Slider(
+              trailing: SizedBox(
+                width: 100,
+                child: Slider(
                   activeColor: Colors.indigoAccent,
                   min: 0.0,
                   max: 15.0,
@@ -36,27 +38,32 @@ class _HomePageState extends State<HomePage> {
                   },
                   value: _sliderValue,
                 ),
-              
+              ),
             ),
             ListTile(
-              title: Text('CACHE LIMIT (MB)'),
-              trailing: TextField(
-                onChanged: (text) {
-                  value = text;
-                },
-              )
-            ),
+                title: Text('CACHE LIMIT (MB)'),
+                trailing: SizedBox(
+                  width: 100,
+                  child: TextField(
+                    onChanged: (text) {
+                      value = text;
+                    },
+                  ),
+                )),
             ListTile(
               title: Text('DASH CAM'),
-              trailing: Switch(
-                value: isCAMSwitched,
-                onChanged: (value) {
-                  setState(() {
-                    isCAMSwitched = value;
-                  });
-                },
-              activeTrackColor: Colors.lightBlueAccent, 
-              activeColor: Colors.blue,
+              trailing: SizedBox(
+                width: 100,
+                child: Switch(
+                  value: isCAMSwitched,
+                  onChanged: (value) {
+                    setState(() {
+                      isCAMSwitched = value;
+                    });
+                  },
+                  activeTrackColor: Colors.lightBlueAccent,
+                  activeColor: Colors.blue,
+                ),
               ),
             ),
           ],
