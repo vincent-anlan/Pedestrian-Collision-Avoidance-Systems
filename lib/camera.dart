@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 
@@ -129,7 +131,7 @@ class _CameraState extends State<Camera> {
     var previewRatio = previewH / previewW;
 
     return RotatedBox(
-      quarterTurns: 3,
+      quarterTurns: Platform.isAndroid ? 1 : 3,
       child: OverflowBox(
         maxHeight: screenRatio > previewRatio
             ? screenH / previewH * previewW
@@ -146,9 +148,14 @@ class _CameraState extends State<Camera> {
     return planes.map((plane) {
       // print(Ig.copyRotate(Ig.Image.fromBytes(1080, 720, plane.bytes), 90)
       //     .getBytes());
-      return Ig.copyRotate(
-              Ig.Image.fromBytes(plane.width, plane.height, plane.bytes), 270)
-          .getBytes();
+      if (Platform.isAndroid)
+        return Ig.copyRotate(
+                Ig.Image.fromBytes(plane.width, plane.height, plane.bytes), 90)
+            .getBytes();
+      else
+        return Ig.copyRotate(
+                Ig.Image.fromBytes(plane.width, plane.height, plane.bytes), 270)
+            .getBytes();
     }).toList();
   }
 }
