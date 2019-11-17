@@ -150,7 +150,7 @@ class _CameraState extends State<Camera> {
       //     .getBytes());
       if (Platform.isAndroid)
         return Ig.copyRotate(
-                Ig.Image.fromBytes(plane.width, plane.height, plane.bytes), 90)
+                Ig.Image.fromBytes(plane.width, plane.height, plane.bytes), 0)
             .getBytes();
       else
         return Ig.copyRotate(
