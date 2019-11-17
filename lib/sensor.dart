@@ -45,21 +45,23 @@ WarnColor getVehicleColor(double speed, double realDistance) {
   }
 }
 
-WarnColor getPedestrianColor(double speed, double realDistance) {
-  var safeDistance = getBrakingDistance(speed, 0.7, 0.4);
-  // if (acceleration <= 0)
-  //   safeDistance = pow(speed, 2) / ((0 - acceleration) * 2);
-  // else
-  //   safeDistance = 10;
+WarnColor getPedestrianColor(double speed,double acceleration ,double realDistance) {
+  var safeDistance;
+   if (acceleration < 0)
+     safeDistance = pow(speed, 2) / ((0 - acceleration) * 2);
+   else
+     safeDistance = (speed/3.6)/2;
 
-  if (realDistance < safeDistance) {
-    return WarnColor.yellow;
-  } else {
+  if (realDistance < safeDistance*(2/3)) {
+    return WarnColor.red;
+  }else if(realDistance < safeDistance){
+   return WarnColor.yellow;
+  }else {
     return WarnColor.green;
   }
 }
 
-getBndboxColor(double speed, List<DetectedObject> objs) {
+getBndboxColor(double speed,double acc ,List<DetectedObject> objs) {
   print("enter color selection");
   List<DetectedObject> temp = new List<DetectedObject>();
   for (var o in objs) {
@@ -76,7 +78,7 @@ getBndboxColor(double speed, List<DetectedObject> objs) {
   Map colorMap = {WarnColor.red: 2, WarnColor.yellow: 1, WarnColor.green: 0};
   for (var i in temp) {
     if (i.type == ObjectType.pedestrian) {
-      wc = max(colorMap[getPedestrianColor(speed, i.distance)], wc);
+      wc = max(colorMap[getPedestrianColor(speed,acc ,i.distance)], wc);
     } else {
       wc = max(colorMap[getVehicleColor(speed, i.distance)], wc);
     }

@@ -80,15 +80,24 @@ class DetectedObject {
       double distance = normal;
       var res = [distance, 0];
       return res;
-    } else {
+    } else if(this.type == ObjectType.truck){
+      //The object is a car
+      if (size == -1) size = 2.8;
+      double w = size / this.width;
+      double baseline = w / 2;
+      double normal = baseline / tan(this.angle / 2);
+      double distance = normal;
+      var res = [distance, 0];
+      return res;
+    }else {
       // The object is a bike
       return [10000, -2];
     }
   }
 
   bool isFrontVehicle() {
-    double xThreshold = 0.5;
-    double yThreshold = 0.5;
+    double xThreshold = 0.2;
+    double yThreshold = 0.2;
     // return true;
     return (this.x + 0.5 * this.width - 0.5).abs() <= xThreshold &&
         (this.y + 0.5 * this.height - 0.5).abs() <= yThreshold &&

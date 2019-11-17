@@ -6,6 +6,7 @@ import 'dart:math' as math;
 import 'models.dart';
 import 'package:flutter/foundation.dart';
 import 'distance.dart';
+import 'package:sensors/sensors.dart';
 
 class BndBox extends StatelessWidget {
   final List<dynamic> results;
@@ -57,7 +58,16 @@ class BndBox extends StatelessWidget {
         //     getBndboxColor(currentLocation.speed * 3.6, objlist).toString());
       });
       // speed = 10.0;
-      _text.changeDectionColor(getBndboxColor(speed * 3.6, objlist));
+
+      double acc=0.0;
+      List<double> _userAccelerometerValues;
+      userAccelerometerEvents.listen((UserAccelerometerEvent event){
+        _userAccelerometerValues = <double>[event.x, event.y, event.z];
+        acc=_userAccelerometerValues[2];
+
+      });
+
+      _text.changeDectionColor(getBndboxColor(speed * 3.6,acc,objlist));
 
       return results.map((re) {
         var _x = re["rect"]["x"];
