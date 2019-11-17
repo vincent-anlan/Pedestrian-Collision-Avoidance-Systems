@@ -9,7 +9,7 @@ import 'distance.dart';
 import 'package:sensors/sensors.dart';
 
 class BndBox extends StatelessWidget {
-  final List<dynamic> results;
+  List<dynamic> results;
   int previewH;
   int previewW;
   final double screenH;
@@ -18,7 +18,16 @@ class BndBox extends StatelessWidget {
   final DetectionNotifier _text;
 
   BndBox(this.results, this.previewH, this.previewW, this.screenH, this.screenW,
-      this.model, this._text);
+      this.model, this._text){
+        // filter for results 
+        List<dynamic> new_results = new List<dynamic>();
+        for(var re in results){
+          if(re["rect"]["w"]<=0.8 && re["rect"]["h"] <= 0.8){
+            new_results.add(re);
+          }
+        }
+        this.results = new_results;
+      }
 
   @override
   Widget build(BuildContext context) {
