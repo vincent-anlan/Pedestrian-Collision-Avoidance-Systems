@@ -16,23 +16,44 @@ class BndBox extends StatelessWidget {
   final double screenW;
   final String model;
   final DetectionNotifier _text;
+  List<DetectedObject> objlist;
+
+  getAccAndSpeed(Stream<UserAccelerometerEvent> userAccelerometerEvents) async {
+    var location = new Location();
+    // location.onLocationChanged().listen((LocationData currentLocation) {
+    //   speed = currentLocation.speed;
+    // });
+    // var locationStream = location.onLocationChanged().take(1);
+    double speed = 0;
+    speed = (await location.getLocation()).speed;
+
+
+  speed =10;
+    print("speed:$speed");
+
+    userAccelerometerEvents.take(1);
+    userAccelerometerEvents = userAccelerometerEvents.take(1);
+    await for (var i in userAccelerometerEvents) {
+      _text.changeDectionColor(getBndboxColor(speed * 3.6, i.z, objlist));
+    }
+  }
 
   BndBox(this.results, this.previewH, this.previewW, this.screenH, this.screenW,
-      this.model, this._text){
-        // filter for results 
-        List<dynamic> new_results = new List<dynamic>();
-        for(var re in results){
-          if(re["rect"]["w"]<=0.8 && re["rect"]["h"] <= 0.8){
-            new_results.add(re);
-          }
-        }
-        this.results = new_results;
+      this.model, this._text) {
+    // filter for results
+    List<dynamic> new_results = new List<dynamic>();
+    for (var re in results) {
+      if (re["rect"]["w"] <= 0.8 && re["rect"]["h"] <= 0.8) {
+        new_results.add(re);
       }
+    }
+    this.results = new_results;
+  }
 
   @override
   Widget build(BuildContext context) {
     List<Widget> _renderBoxes() {
-      List<DetectedObject> objlist = [];
+      objlist = [];
       try {
         if (results.length != 0) {
           for (var re in results) {
@@ -59,24 +80,9 @@ class BndBox extends StatelessWidget {
       } catch (Exception) {
         print("Exception rasied in for loop");
       }
-      double speed = 0.0;
-      var location = new Location();
-      location.onLocationChanged().listen((LocationData currentLocation) {
-        speed = currentLocation.speed;
-        // print('color:' +
-        //     getBndboxColor(currentLocation.speed * 3.6, objlist).toString());
-      });
-      // speed = 10.0;
 
-      double acc=0.0;
-      List<double> _userAccelerometerValues;
-      userAccelerometerEvents.listen((UserAccelerometerEvent event){
-        _userAccelerometerValues = <double>[event.x, event.y, event.z];
-        acc=_userAccelerometerValues[2];
-
-      });
-
-      _text.changeDectionColor(getBndboxColor(speed * 3.6,acc,objlist));
+      //Get acceleration and speed
+      getAccAndSpeed(userAccelerometerEvents);
 
       return results.map((re) {
         var _x = re["rect"]["x"];

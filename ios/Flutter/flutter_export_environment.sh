@@ -1,11 +1,11 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=/Applications/flutter"
-export "FLUTTER_APPLICATION_PATH=/Users/stevensheng/Desktop/Pedestrian-Collision-Avoidance-Systems"
-export "FLUTTER_TARGET=/Users/stevensheng/Desktop/Pedestrian-Collision-Avoidance-Systems/lib/main.dart"
+export "FLUTTER_ROOT=/Users/ethan/Development/flutter"
+export "FLUTTER_APPLICATION_PATH=/Users/ethan/Desktop/CS493"
+export "FLUTTER_TARGET=/Users/ethan/Desktop/CS493/lib/main.dart"
 export "FLUTTER_BUILD_DIR=build"
 export "SYMROOT=${SOURCE_ROOT}/../build/ios"
-export "FLUTTER_FRAMEWORK_DIR=/Applications/flutter/bin/cache/artifacts/engine/ios"
+export "FLUTTER_FRAMEWORK_DIR=/Users/ethan/Development/flutter/bin/cache/artifacts/engine/ios"
 export "FLUTTER_BUILD_NAME=1.0.0"
 export "FLUTTER_BUILD_NUMBER=1"
 export "TRACK_WIDGET_CREATION=true"
