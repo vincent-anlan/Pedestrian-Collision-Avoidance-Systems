@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             ListTile(
-              title: Text('Sensility'),
+              title: Text('SENSITIVITY'),
               trailing: SizedBox(
                 width: 100,
                 child: Slider(
