@@ -27,8 +27,7 @@ class BndBox extends StatelessWidget {
     double speed = 0;
     speed = (await location.getLocation()).speed;
 
-
-  speed =10;
+    speed = 10;
     print("speed:$speed");
 
     userAccelerometerEvents.take(1);
@@ -63,7 +62,7 @@ class BndBox extends StatelessWidget {
             var _h = re["rect"]["h"];
             var label = re["detectedClass"];
             var confidence = re["confidenceInClass"];
-            var obj = new DetectedObject(label, _x, _w, _y, _h);
+            var obj = new DetectedObject(label, _x, _y, _w, _h);
             var distance = obj.distance;
             String msg = '$label detected!' + ' Distance: $distance';
             _text.changeDectionMsg(msg);

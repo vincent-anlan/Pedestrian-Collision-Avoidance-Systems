@@ -69,34 +69,30 @@ class DetectedObject {
           + pow(normal, 2));*/
       double ang2 = atan((a / normal));
       var res = [distance, ang2]; //ang2 is in n*pi
-      print("This is a person, the dis is:");
-      print(distance);
       return res;
     } else if (this.type == ObjectType.car) {
       //The object is a car
-      if (size == -1) size = 2.3;
+      if (size == -1) size = 2.0;
       double w = size / this.width;
       //double w =size/(ratioW*(resW/resH));
+
       double baseline = w / 2;
       double normal = baseline / tan(this.angle / 2);
       double distance = normal;
       var res = [distance, 0];
-      print("This is a car, the dis is:");
-      print(distance);
-      return res;
 
-    } else if(this.type == ObjectType.truck){
+      return res;
+    } else if (this.type == ObjectType.truck) {
       //The object is a car
-      if (size == -1) size = 2.8;
+      if (size == -1) size = 2.5;
       double w = size / this.width;
       double baseline = w / 2;
       double normal = baseline / tan(this.angle / 2);
       double distance = normal;
       var res = [distance, 0];
-      print("This is a truck, the dis is:");
-      print(distance);
+
       return res;
-    }else {
+    } else {
       // The object is a bike
       return [10000, -2];
     }
