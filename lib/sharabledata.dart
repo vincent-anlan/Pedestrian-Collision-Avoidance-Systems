@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
 class SharableData {
-  String displayMsg;
-  Color color;
+  String displayMsg = "No people dected!";
+  Color color = Colors.green;
+  String cacheLimit = "";
+  bool isCAMSwitched = true;
+  double sliderValue = 0.0;
 
-  SharableData (String displayMsg, Color color) {
-    this.displayMsg = displayMsg;
-    this.color = color;
-  }
-
-  
+  SharableData ();
 }

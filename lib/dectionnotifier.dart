@@ -1,5 +1,4 @@
 import 'package:audioplayers/audio_cache.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:road_hackers/sharabledata.dart';
 
@@ -20,5 +19,23 @@ class DetectionNotifier extends ValueNotifier<SharableData> {
       player.clearCache();
       player.play('warningSound.mp3');
     }
+  }
+
+  void changeCacheLimite(String cacheLimit) {
+    value.cacheLimit = cacheLimit;
+    notifyListeners();
+    print("cachelimit: " + cacheLimit);
+  }
+
+  void changeisCAMSwitched(bool isCAMSwitched) {
+    value.isCAMSwitched = isCAMSwitched;
+    notifyListeners();
+    print("isCAMSwitched: " + isCAMSwitched.toString());
+  }
+
+  void changeSliderValue(double sliderValue) {
+    value.sliderValue = sliderValue;
+    notifyListeners();
+    print("sliderValue: " + sliderValue.toString());
   }
 }

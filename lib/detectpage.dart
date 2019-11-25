@@ -24,13 +24,16 @@ class _DetectPageState extends State<DetectPage> {
   int _imageHeight = 0;
   int _imageWidth = 0;
   String _model = "";
-  final DetectionNotifier _text =
-      DetectionNotifier(SharableData("No people detected!", Colors.black));
+  final DetectionNotifier _text = DetectionNotifier(SharableData());
+
+      // DetectionNotifier(SharableData("No people detected!", Colors.black));
 
   @override
   void initState() {
     super.initState();
     loadModel();
+    _text.changeDectionMsg("No object detected!");
+    _text.changeDectionColor(Colors.green);
     // print("Speed:" + getSpeed().toString());
   }
 

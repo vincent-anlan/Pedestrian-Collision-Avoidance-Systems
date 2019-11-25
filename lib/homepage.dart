@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:road_hackers/dectionnotifier.dart';
+import 'package:road_hackers/sharabledata.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -7,7 +9,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String value = "";
+  DetectionNotifier notifier = DetectionNotifier(SharableData());
+  String cacheLimit = "";
   bool isCAMSwitched = true;
   double _sliderValue = 0.0;
 
@@ -35,6 +38,7 @@ class _HomePageState extends State<HomePage> {
                   max: 15.0,
                   onChanged: (newRating) {
                     setState(() => _sliderValue = newRating);
+                    notifier.changeSliderValue(newRating);
                   },
                   value: _sliderValue,
                 ),
@@ -45,8 +49,13 @@ class _HomePageState extends State<HomePage> {
                 trailing: SizedBox(
                   width: 100,
                   child: TextField(
+                    decoration: new InputDecoration.collapsed(
+                      hintText: cacheLimit
+                    ),
+                    keyboardType: TextInputType.number,
                     onChanged: (text) {
-                      value = text;
+                      cacheLimit = text;
+                      notifier.changeCacheLimite(text);
                     },
                   ),
                 )),
@@ -59,6 +68,7 @@ class _HomePageState extends State<HomePage> {
                   onChanged: (value) {
                     setState(() {
                       isCAMSwitched = value;
+                      notifier.changeisCAMSwitched(value);
                     });
                   },
                   activeTrackColor: Colors.lightBlueAccent,
