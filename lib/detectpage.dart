@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-import 'package:road_hackers/dectionnotifier.dart';
 import 'package:road_hackers/sensor.dart';
 import 'package:road_hackers/sharabledata.dart';
+import 'package:road_hackers/datanotifier.dart';
 import 'package:tflite/tflite.dart';
 import 'dart:math' as math;
 
@@ -24,7 +24,7 @@ class _DetectPageState extends State<DetectPage> {
   int _imageHeight = 0;
   int _imageWidth = 0;
   String _model = "";
-  final DetectionNotifier _text = DetectionNotifier(SharableData());
+  final DataNotifier _text = DataNotifier(SharableData());
 
       // DetectionNotifier(SharableData("No people detected!", Colors.black));
 

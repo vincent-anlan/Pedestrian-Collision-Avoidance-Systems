@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
-import 'package:road_hackers/dectionnotifier.dart';
 import 'package:road_hackers/sensor.dart';
+import 'package:road_hackers/datanotifier.dart';
 import 'dart:math' as math;
 import 'models.dart';
 import 'package:flutter/foundation.dart';
@@ -15,7 +15,7 @@ class BndBox extends StatelessWidget {
   final double screenH;
   final double screenW;
   final String model;
-  final DetectionNotifier _text;
+  final DataNotifier _text;
   List<DetectedObject> objlist;
 
   getAccAndSpeed(Stream<UserAccelerometerEvent> userAccelerometerEvents) async {

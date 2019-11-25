@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:road_hackers/dectionnotifier.dart';
 import 'package:road_hackers/sharabledata.dart';
+import 'package:road_hackers/datanotifier.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -9,7 +9,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  DetectionNotifier notifier = DetectionNotifier(SharableData());
+  DataNotifier notifier = DataNotifier(SharableData());
   String cacheLimit = "";
   bool isCAMSwitched = true;
   double _sliderValue = 0.0;
