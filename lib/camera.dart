@@ -46,63 +46,27 @@ class _CameraState extends State<Camera> {
           if (!isDetecting) {
             isDetecting = true;
             int startTime = new DateTime.now().millisecondsSinceEpoch;
+            // print(img.height);
+            Tflite.detectObjectOnFrame(
+              // bytesList: img.planes.map((plane) {
+              //   return plane.bytes;
+              // }).toList(),
+              bytesList: dealImage(img.planes),
+              model: "SSDMobileNet",
+              imageHeight: img.width,
+              imageWidth: img.height,
+              imageMean: 127.5,
+              imageStd: 127.5,
+              numResultsPerClass: 6,
+              threshold: 0.55,
+            ).then((recognitions) {
+              int endTime = new DateTime.now().millisecondsSinceEpoch;
+              // print("Detection took ${endTime - startTime}");
 
-            if (widget.model == mobilenet) {
-              Tflite.runModelOnFrame(
-                bytesList: img.planes.map((plane) {
-                  return plane.bytes;
-                }).toList(),
-                imageHeight: img.height,
-                imageWidth: img.width,
-                numResults: 2,
-              ).then((recognitions) {
-                int endTime = new DateTime.now().millisecondsSinceEpoch;
-                // print("Detection took ${endTime - startTime}");
+              widget.setRecognitions(recognitions, img.height, img.width);
 
-                widget.setRecognitions(recognitions, img.height, img.width);
-
-                isDetecting = false;
-              });
-            } else if (widget.model == posenet) {
-              Tflite.runPoseNetOnFrame(
-                bytesList: img.planes.map((plane) {
-                  return plane.bytes;
-                }).toList(),
-                // bytesList: dealImage(img.planes),
-                imageHeight: img.height,
-                imageWidth: img.width,
-                numResults: 2,
-              ).then((recognitions) {
-                int endTime = new DateTime.now().millisecondsSinceEpoch;
-                // print("Detection took ${endTime - startTime}");
-
-                widget.setRecognitions(recognitions, img.height, img.width);
-
-                isDetecting = false;
-              });
-            } else {
-              // print(img.height);
-              Tflite.detectObjectOnFrame(
-                // bytesList: img.planes.map((plane) {
-                //   return plane.bytes;
-                // }).toList(),
-                bytesList: dealImage(img.planes),
-                model: widget.model == yolo ? "YOLO" : "SSDMobileNet",
-                imageHeight: img.width,
-                imageWidth: img.height,
-                imageMean: widget.model == yolo ? 0 : 128,
-                imageStd: widget.model == yolo ? 255.0 : 127,
-                numResultsPerClass: 4,
-                threshold: widget.model == yolo ? 0.2 : 0.46,
-              ).then((recognitions) {
-                int endTime = new DateTime.now().millisecondsSinceEpoch;
-                // print("Detection took ${endTime - startTime}");
-
-                widget.setRecognitions(recognitions, img.height, img.width);
-
-                isDetecting = false;
-              });
-            }
+              isDetecting = false;
+            });
           }
         });
       });
