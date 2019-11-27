@@ -45,44 +45,41 @@ WarnColor getVehicleColor(double speed, double realDistance) {
   }
 }
 
-WarnColor getPedestrianColor(double speed,double acceleration ,double realDistance) {
+WarnColor getPedestrianColor(
+    double speed, double acceleration, double realDistance) {
   var safeDistance;
-   if (acceleration < 0)
-     safeDistance = pow(speed, 2) / ((0 - acceleration) * 2);
-   else
-     safeDistance = (speed/3.6)/2;
+  if (acceleration < 0)
+    safeDistance = pow(speed, 2) / ((0 - acceleration) * 2);
+  else
+    safeDistance = (speed / 3.6) / 2;
 
-  if (realDistance < safeDistance*(2/3)) {
+  if (realDistance < safeDistance * (2 / 3)) {
     return WarnColor.red;
-  }else if(realDistance < safeDistance){
-   return WarnColor.yellow;
-  }else {
+  } else if (realDistance < safeDistance) {
+    return WarnColor.yellow;
+  } else {
     return WarnColor.green;
   }
 }
 
-getBndboxColor(double speed,double acc ,List<DetectedObject> objs) {
-  print("enter color selection");
+getBndboxColor(double speed, double acc, List<DetectedObject> objs) {
   List<DetectedObject> temp = new List<DetectedObject>();
   for (var o in objs) {
     if (o.isFrontVehicle()) {
       temp.add(o);
-      print("add car to list");
     }
-    if (o.type == ObjectType.pedestrian) {
+    if (o.isFrontPedestrian()) {
       temp.add(o);
-      print("add ppl to list");
     }
   }
   int wc = 0;
   Map colorMap = {WarnColor.red: 2, WarnColor.yellow: 1, WarnColor.green: 0};
   for (var i in temp) {
     if (i.type == ObjectType.pedestrian) {
-      wc = max(colorMap[getPedestrianColor(speed,acc ,i.distance)], wc);
+      wc = max(colorMap[getPedestrianColor(speed, acc, i.distance)], wc);
     } else {
       wc = max(colorMap[getVehicleColor(speed, i.distance)], wc);
     }
-    print('wc:' + wc.toString());
   }
   if (wc == 0) {
     return Colors.green;

@@ -63,7 +63,8 @@ class BndBox extends StatelessWidget {
             var obj = new DetectedObject(label, _x, _y, _w, _h);
             var distance = obj.distance;
             String msg = '$label detected!' + ' Distance: $distance';
-            _text.changeDectionMsg(msg);
+            if (obj.isFrontPedestrian() || obj.isFrontVehicle())
+              _text.changeDectionMsg(msg);
             debugPrint('$label detected!!!');
             debugPrint(
                 'x: $_x, y: $_y, w: $_w, h: $_h, confidence: $confidence');

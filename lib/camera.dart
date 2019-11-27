@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 
 import 'package:image/image.dart' as Ig;
+import 'package:path_provider/path_provider.dart';
 import 'package:tflite/tflite.dart';
 import 'dart:math' as math;
 import 'models.dart';
+import 'package:path/path.dart' show join;
 
 typedef void Callback(List<dynamic> list, int h, int w);
 
@@ -46,23 +48,21 @@ class _CameraState extends State<Camera> {
           if (!isDetecting) {
             isDetecting = true;
             int startTime = new DateTime.now().millisecondsSinceEpoch;
-            // print(img.height);
             Tflite.detectObjectOnFrame(
-              // bytesList: img.planes.map((plane) {
-              //   return plane.bytes;
-              // }).toList(),
               bytesList: dealImage(img.planes),
               model: "SSDMobileNet",
               imageHeight: img.width,
               imageWidth: img.height,
-              imageMean: 127.5,
-              imageStd: 127.5,
+              imageMean: 128,
+              imageStd: 127,
               numResultsPerClass: 6,
-              threshold: 0.55,
+              threshold: 0.45,
             ).then((recognitions) {
               int endTime = new DateTime.now().millisecondsSinceEpoch;
               // print("Detection took ${endTime - startTime}");
-
+              // if (endTime - startTime > 3000) {
+              //   takePicture();
+              // }
               widget.setRecognitions(recognitions, img.height, img.width);
 
               isDetecting = false;
@@ -121,5 +121,15 @@ class _CameraState extends State<Camera> {
                 Ig.Image.fromBytes(plane.width, plane.height, plane.bytes), 270)
             .getBytes();
     }).toList();
+  }
+
+  void takePicture() async {
+    final path = join(
+      // Store the picture in the temp directory.
+      // Find the temp directory using the `path_provider` plugin.
+      (await getTemporaryDirectory()).path,
+      '${DateTime.now()}.png',
+    );
+    controller.takePicture(path);
   }
 }

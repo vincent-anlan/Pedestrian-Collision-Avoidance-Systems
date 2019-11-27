@@ -1,26 +1,5 @@
 import 'dart:math';
 
-double STD(ratioH, ratioW, coordX) {
-  double size = 1.7;
-  double ang = 0.364 * pi;
-  var resH = 2436;
-  var resW = 1125;
-  //double w= size/(ratioH*(ratioW/ratioH));
-  double w = size / ratioH;
-
-  double wx = w * (resW / resH);
-
-  double baseline = w / 2;
-
-  double normal = baseline / tan(ang / 2);
-  // print(normal);
-  double a = ((0.5 - coordX - ratioW / 2) * wx).abs();
-  // print(a);
-
-  double distance = sqrt(pow(a, 2) + pow(normal, 2));
-  return distance;
-}
-
 // use this class instead, distance will be calculated in constructor
 enum ObjectType { pedestrian, car, tram, truck, cyclist, van }
 
@@ -60,17 +39,11 @@ class DetectedObject {
       double normal = baseline / tan(this.angle / 2);
       double a = ((0.5 - this.x - this.width / 2) * w).abs();
       double distance = sqrt(pow(a, 2) + pow(normal, 2));
-      /*double w = size / ratioH;
-      double wx = w * (resW / resH);
-      double baseline = w / 2;
-      double normal = baseline / tan(ang / 2);
-      double a = ((0.5 - coordX - ratioW / 2) * wx).abs();
-      double distance = sqrt(pow(a, 2)
-          + pow(normal, 2));*/
+
       double ang2 = atan((a / normal));
       var res = [distance, ang2]; //ang2 is in n*pi
       return res;
-    } else if (this.type == ObjectType.car) {
+    } else if (this.type == ObjectType.car || this.type == ObjectType.cyclist) {
       //The object is a car
       if (size == -1) size = 2.0;
       double w = size / this.width;
@@ -99,13 +72,24 @@ class DetectedObject {
   }
 
   bool isFrontVehicle() {
-    double xThreshold = 0.2;
-    double yThreshold = 0.2;
+    double xThreshold = 0.1;
+    //double yThreshold = 0.2;
     // return true;
+
     return (this.x + 0.5 * this.width - 0.5).abs() <= xThreshold &&
-        (this.y + 0.5 * this.height - 0.5).abs() <= yThreshold &&
+        // (this.y + 0.5 * this.height - 0.5).abs() <= yThreshold &&
         (this.type == ObjectType.car ||
             this.type == ObjectType.truck ||
             this.type == ObjectType.van);
+  }
+
+  bool isFrontPedestrian() {
+    double xThreshold = 0.3;
+    //double yThreshold = 0.2;
+    // return true;
+    print((this.x + 0.5 * this.width - 0.5).abs());
+    return (this.x + 0.5 * this.width - 0.5).abs() <= xThreshold &&
+        // (this.y + 0.5 * this.height - 0.5).abs() <= yThreshold &&
+        this.type == ObjectType.pedestrian;
   }
 }
