@@ -59,6 +59,7 @@ flutter:
     - assets/ssd_mobilenet.tflite
     - assets/detect.txt
     - assets/detect.tflite
+    - assets/new_detect.tflite
     - assets/warningSound.mp3
   # To add assets to your application, add an assets section, like this:
   # assets:

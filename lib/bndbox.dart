@@ -27,7 +27,7 @@ class BndBox extends StatelessWidget {
     var userLocation = Provider.of<UserLocation>(context);
     double speed = (userLocation.speed == -1.0) ? 0.0 : userLocation.speed;
     print('speed:$speed');
-    print('location:${userLocation.longitude}');
+    // print('location:${userLocation.longitude}');
     //getAcc
     userAccelerometerEvents = userAccelerometerEvents.take(1);
     await for (var i in userAccelerometerEvents) {
