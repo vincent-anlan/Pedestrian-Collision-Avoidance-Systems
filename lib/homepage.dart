@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:road_hackers/sharabledata.dart';
 import 'package:road_hackers/datanotifier.dart';
+import 'models/sharabledata.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -49,9 +49,8 @@ class _HomePageState extends State<HomePage> {
                 trailing: SizedBox(
                   width: 100,
                   child: TextField(
-                    decoration: new InputDecoration.collapsed(
-                      hintText: cacheLimit
-                    ),
+                    decoration:
+                        new InputDecoration.collapsed(hintText: cacheLimit),
                     keyboardType: TextInputType.number,
                     onChanged: (text) {
                       cacheLimit = text;

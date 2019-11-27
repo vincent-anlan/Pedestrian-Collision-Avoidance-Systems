@@ -58,7 +58,7 @@ SPEC CHECKSUMS:
   sensors: 4bd31219c4bf9d7d4401b392a1701ee3adc1a296
   TensorFlowLite: 8b9dc4eb32eac0f8cb660c66bca7604da56dcc5a
   tflite: a6911f4ac99be9c73c1dcffb1a5d54b3c56087a8
-  video_player: 3964090a33353060ed7f58aa6427c7b4b208ec21
+  video_player: 69c5f029fac4ffe4fc8a85ea7f7b793709661549
 
 PODFILE CHECKSUM: 1b66dae606f75376c5f2135a8290850eeb09ae83
 

@@ -1,10 +1,10 @@
 import 'package:audioplayers/audio_cache.dart';
 import 'package:flutter/material.dart';
-import 'package:road_hackers/sharabledata.dart';
+import 'models/sharabledata.dart';
 
 class DataNotifier extends ValueNotifier<SharableData> {
   static AudioCache player = AudioCache();
-  
+
   DataNotifier(SharableData value) : super(value);
 
   void changeDectionMsg(String msg) {

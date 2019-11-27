@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
+import 'package:provider/provider.dart';
 import 'package:road_hackers/sensor.dart';
 import 'package:road_hackers/datanotifier.dart';
 import 'dart:math' as math;
@@ -7,6 +8,8 @@ import 'models.dart';
 import 'package:flutter/foundation.dart';
 import 'distance.dart';
 import 'package:sensors/sensors.dart';
+
+import 'models/user_location.dart';
 
 class BndBox extends StatelessWidget {
   List<dynamic> results;
@@ -18,19 +21,14 @@ class BndBox extends StatelessWidget {
   final DataNotifier _text;
   List<DetectedObject> objlist;
 
-  getAccAndSpeed(Stream<UserAccelerometerEvent> userAccelerometerEvents) async {
-    var location = new Location();
-    // location.onLocationChanged().listen((LocationData currentLocation) {
-    //   speed = currentLocation.speed;
-    // });
-    // var locationStream = location.onLocationChanged().take(1);
-    double speed = 0;
-    speed = (await location.getLocation()).speed;
-
-    speed = 10;
-    print("speed:$speed");
-
-    userAccelerometerEvents.take(1);
+  getAccAndSpeed(
+      Stream<UserAccelerometerEvent> userAccelerometerEvents, context) async {
+    //getSpeed
+    var userLocation = Provider.of<UserLocation>(context);
+    double speed = (userLocation.speed == -1.0) ? 0.0 : userLocation.speed;
+    print('speed:$speed');
+    print('location:${userLocation.longitude}');
+    //getAcc
     userAccelerometerEvents = userAccelerometerEvents.take(1);
     await for (var i in userAccelerometerEvents) {
       _text.changeDectionColor(getBndboxColor(speed * 3.6, i.z, objlist));
@@ -66,7 +64,6 @@ class BndBox extends StatelessWidget {
             var distance = obj.distance;
             String msg = '$label detected!' + ' Distance: $distance';
             _text.changeDectionMsg(msg);
-            // _text.changeDectionColor(Colors.red);
             debugPrint('$label detected!!!');
             debugPrint(
                 'x: $_x, y: $_y, w: $_w, h: $_h, confidence: $confidence');
@@ -81,7 +78,7 @@ class BndBox extends StatelessWidget {
       }
 
       //Get acceleration and speed
-      getAccAndSpeed(userAccelerometerEvents);
+      getAccAndSpeed(userAccelerometerEvents, context);
 
       return results.map((re) {
         var _x = re["rect"]["x"];

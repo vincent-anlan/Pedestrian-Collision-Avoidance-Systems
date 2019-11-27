@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import 'package:road_hackers/sensor.dart';
 import 'homepage.dart';
 import 'detectpage.dart';
 import 'videopage.dart';
@@ -25,6 +24,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
+        // home: HomePage(),
         home: HomePage(),
         routes: {
           // '/': (context) => HomePage(),
