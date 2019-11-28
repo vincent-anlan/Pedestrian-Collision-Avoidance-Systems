@@ -51,7 +51,7 @@ class _DetectPageState extends State<DetectPage> {
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
     // loadModel();
-    return StreamProvider<UserLocation>(
+    return StreamProvider<UserLocation>.controller(
       builder: (context) => LocationService().locationStream,
       child: Scaffold(
         body: Stack(

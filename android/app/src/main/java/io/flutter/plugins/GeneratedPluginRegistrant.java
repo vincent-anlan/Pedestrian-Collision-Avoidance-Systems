@@ -5,6 +5,7 @@ import xyz.luan.audioplayers.AudioplayersPlugin;
 import io.flutter.plugins.camera.CameraPlugin;
 import com.lyokone.location.LocationPlugin;
 import io.flutter.plugins.pathprovider.PathProviderPlugin;
+import top.kikt.imagescanner.ImageScannerPlugin;
 import io.flutter.plugins.sensors.SensorsPlugin;
 import sq.flutter.tflite.TflitePlugin;
 import io.flutter.plugins.videoplayer.VideoPlayerPlugin;
@@ -21,6 +22,7 @@ public final class GeneratedPluginRegistrant {
     CameraPlugin.registerWith(registry.registrarFor("io.flutter.plugins.camera.CameraPlugin"));
     LocationPlugin.registerWith(registry.registrarFor("com.lyokone.location.LocationPlugin"));
     PathProviderPlugin.registerWith(registry.registrarFor("io.flutter.plugins.pathprovider.PathProviderPlugin"));
+    ImageScannerPlugin.registerWith(registry.registrarFor("top.kikt.imagescanner.ImageScannerPlugin"));
     SensorsPlugin.registerWith(registry.registrarFor("io.flutter.plugins.sensors.SensorsPlugin"));
     TflitePlugin.registerWith(registry.registrarFor("sq.flutter.tflite.TflitePlugin"));
     VideoPlayerPlugin.registerWith(registry.registrarFor("io.flutter.plugins.videoplayer.VideoPlayerPlugin"));

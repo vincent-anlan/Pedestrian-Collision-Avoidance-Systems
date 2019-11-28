@@ -128,6 +128,12 @@
       "languageVersion": "2.4"
     },
     {
+      "name": "photo_manager",
+      "rootUri": "file:///Applications/flutter/.pub-cache/hosted/pub.dartlang.org/photo_manager-0.4.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
       "name": "platform",
       "rootUri": "file:///Applications/flutter/.pub-cache/hosted/pub.dartlang.org/platform-2.2.1",
       "packageUri": "lib/",
@@ -236,7 +242,7 @@
       "languageVersion": "2.1"
     }
   ],
-  "generated": "2019-11-27T03:08:38.189056Z",
+  "generated": "2019-11-28T00:16:27.715615Z",
   "generator": "pub",
   "generatorVersion": "2.7.0"
 }

@@ -28,6 +28,12 @@
 @import path_provider;
 #endif
 
+#if __has_include(<photo_manager/ImageScannerPlugin.h>)
+#import <photo_manager/ImageScannerPlugin.h>
+#else
+@import photo_manager;
+#endif
+
 #if __has_include(<sensors/SensorsPlugin.h>)
 #import <sensors/SensorsPlugin.h>
 #else
@@ -53,6 +59,7 @@
   [CameraPlugin registerWithRegistrar:[registry registrarForPlugin:@"CameraPlugin"]];
   [LocationPlugin registerWithRegistrar:[registry registrarForPlugin:@"LocationPlugin"]];
   [FLTPathProviderPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTPathProviderPlugin"]];
+  [ImageScannerPlugin registerWithRegistrar:[registry registrarForPlugin:@"ImageScannerPlugin"]];
   [FLTSensorsPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTSensorsPlugin"]];
   [TflitePlugin registerWithRegistrar:[registry registrarForPlugin:@"TflitePlugin"]];
   [FLTVideoPlayerPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTVideoPlayerPlugin"]];

@@ -5,7 +5,7 @@ import 'package:road_hackers/models/user_location.dart';
 
 class LocationService {
   // Keep track of current Location
-  UserLocation _currentLocation;
+  // UserLocation _currentLocation;
   Location location = Location();
   // Continuously emit location updates
   StreamController<UserLocation> _locationController =
@@ -27,5 +27,5 @@ class LocationService {
     });
   }
 
-  Stream<UserLocation> get locationStream => _locationController.stream;
+  StreamController<UserLocation> get locationStream => _locationController;
 }

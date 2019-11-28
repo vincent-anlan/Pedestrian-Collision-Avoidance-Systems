@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
 class SharableData {
@@ -6,6 +7,6 @@ class SharableData {
   String cacheLimit = "";
   bool isCAMSwitched = true;
   double sliderValue = 0.0;
-
-  SharableData ();
+  // CameraController controller = null;
+  SharableData();
 }

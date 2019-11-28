@@ -43,11 +43,12 @@ class _CameraState extends State<Camera> {
           return;
         }
         setState(() {});
+        // Set controller
 
         controller.startImageStream((CameraImage img) {
           if (!isDetecting) {
             isDetecting = true;
-            int startTime = new DateTime.now().millisecondsSinceEpoch;
+            // int startTime = new DateTime.now().millisecondsSinceEpoch;
             Tflite.detectObjectOnFrame(
               bytesList: dealImage(img.planes),
               model: "SSDMobileNet",
@@ -58,7 +59,7 @@ class _CameraState extends State<Camera> {
               numResultsPerClass: 6,
               threshold: 0.45,
             ).then((recognitions) {
-              int endTime = new DateTime.now().millisecondsSinceEpoch;
+              // int endTime = new DateTime.now().millisecondsSinceEpoch;
               // print("Detection took ${endTime - startTime}");
               // if (endTime - startTime > 3000) {
               //   takePicture();
@@ -123,13 +124,13 @@ class _CameraState extends State<Camera> {
     }).toList();
   }
 
-  void takePicture() async {
-    final path = join(
-      // Store the picture in the temp directory.
-      // Find the temp directory using the `path_provider` plugin.
-      (await getTemporaryDirectory()).path,
-      '${DateTime.now()}.png',
-    );
-    controller.takePicture(path);
-  }
+  // void takePicture() async {
+  //   final path = join(
+  //     // Store the picture in the temp directory.
+  //     // Find the temp directory using the `path_provider` plugin.
+  //     (await getTemporaryDirectory()).path,
+  //     '${DateTime.now()}.png',
+  //   );
+  //   controller.takePicture(path);
+  // }
 }

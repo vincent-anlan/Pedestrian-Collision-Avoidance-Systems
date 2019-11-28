@@ -35,4 +35,8 @@ class DataNotifier extends ValueNotifier<SharableData> {
     value.sliderValue = sliderValue;
     notifyListeners();
   }
+
+  // void changeControlValue(controller){
+  //   value.controller = controller;
+  // }
 }
