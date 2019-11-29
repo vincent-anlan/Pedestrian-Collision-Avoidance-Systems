@@ -45,7 +45,7 @@ class DetectedObject {
       return res;
     } else if (this.type == ObjectType.car || this.type == ObjectType.cyclist) {
       //The object is a car
-      if (size == -1) size = 2.0;
+      if (size == -1) size = 1.9;
       double w = size / this.width;
       //double w =size/(ratioW*(resW/resH));
 
