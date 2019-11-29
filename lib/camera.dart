@@ -127,8 +127,11 @@ class _CameraState extends State<Camera> {
   }
 
   void takePicture(BuildContext context, CameraImage img) {
-    compute(convertImagetoPng, img).then((list) async {
-      print('finish conversion');
+    // compute(convertImagetoPng, img).then((list) async {
+    //   print('finish conversion');
+    //   ImageGallerySaver.saveImage(list);
+    // });
+    convertImagetoPng(img).then((list) async {
       ImageGallerySaver.saveImage(list);
     });
   }
