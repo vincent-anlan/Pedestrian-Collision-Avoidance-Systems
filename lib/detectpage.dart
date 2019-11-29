@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:provider/provider.dart';
 import 'package:road_hackers/datanotifier.dart';
 import 'package:tflite/tflite.dart';
@@ -10,6 +13,7 @@ import 'bndbox.dart';
 
 import 'models/sharabledata.dart';
 import 'models/user_location.dart';
+import 'services/acceleration_service.dart';
 import 'services/location_service.dart';
 
 class DetectPage extends StatefulWidget {
@@ -27,6 +31,7 @@ class _DetectPageState extends State<DetectPage> {
   int _imageWidth = 0;
   String _model = "";
   final DataNotifier _text = DataNotifier(SharableData());
+  CameraController _controller;
 
   // DetectionNotifier(SharableData("No people detected!", Colors.black));
 
@@ -47,20 +52,27 @@ class _DetectPageState extends State<DetectPage> {
     });
   }
 
+  setController(controller) {
+    setState(() {
+      _controller = controller;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
     // loadModel();
-    return StreamProvider<UserLocation>.controller(
-      builder: (context) => LocationService().locationStream,
+    return MultiProvider(
+      providers: [
+        StreamProvider<UserLocation>.controller(
+            builder: (context) => LocationService().locationStream),
+        StreamProvider<double>.controller(
+            builder: (context) => AccService().accStream)
+      ],
       child: Scaffold(
         body: Stack(
           children: [
-            Camera(
-              widget.cameras,
-              _model,
-              setRecognitions,
-            ),
+            Camera(widget.cameras, _model, setRecognitions, setController),
             BndBox(
               _recognitions == null ? [] : _recognitions,
               math.min(_imageHeight, _imageWidth),

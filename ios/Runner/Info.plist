@@ -55,5 +55,7 @@
 	<string>Needed to access location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Needed to access location</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Needed add image to gallery</string>
 </dict>
 </plist>

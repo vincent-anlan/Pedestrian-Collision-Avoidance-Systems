@@ -21,20 +21,6 @@ class BndBox extends StatelessWidget {
   final DataNotifier _text;
   List<DetectedObject> objlist;
 
-  getAccAndSpeed(
-      Stream<UserAccelerometerEvent> userAccelerometerEvents, context) async {
-    //getSpeed
-    var userLocation = Provider.of<UserLocation>(context);
-    double speed = (userLocation.speed == -1.0) ? 0.0 : userLocation.speed;
-    print('speed:$speed');
-    // print('location:${userLocation.longitude}');
-    //getAcc
-    userAccelerometerEvents = userAccelerometerEvents.take(1);
-    await for (var i in userAccelerometerEvents) {
-      _text.changeDectionColor(getBndboxColor(speed * 3.6, i.z, objlist));
-    }
-  }
-
   BndBox(this.results, this.previewH, this.previewW, this.screenH, this.screenW,
       this.model, this._text) {
     // filter for results
@@ -68,9 +54,7 @@ class BndBox extends StatelessWidget {
             debugPrint('$label detected!!!');
             debugPrint(
                 'x: $_x, y: $_y, w: $_w, h: $_h, confidence: $confidence');
-            // debugPrint('now: $now.second.round()');
             debugPrint('distance: $distance');
-            // debugPrint(new DateFormat("H:m:s").format(now));
             objlist.add(obj);
           }
         }
@@ -79,7 +63,12 @@ class BndBox extends StatelessWidget {
       }
 
       //Get acceleration and speed
-      getAccAndSpeed(userAccelerometerEvents, context);
+      var userLocation = Provider.of<UserLocation>(context);
+      double speed = (userLocation.speed == -1.0) ? 0.0 : userLocation.speed;
+      print('speed:$speed');
+      double acc = Provider.of<double>(context);
+      print('acc:$acc');
+      _text.changeDectionColor(getBndboxColor(speed * 3.6, acc, objlist));
 
       return results.map((re) {
         var _x = re["rect"]["x"];

@@ -1,8 +1,8 @@
 audioplayers=/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/audioplayers-0.13.3/
 camera=/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/camera-0.5.7/
+image_gallery_saver=/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/image_gallery_saver-1.2.2/
 location=/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/location-2.3.5/
 path_provider=/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-1.4.5/
-photo_manager=/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/photo_manager-0.4.5/
 sensors=/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/sensors-0.4.1+3/
 tflite=/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/tflite-1.0.4/
 video_player=/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/video_player-0.10.3+3/

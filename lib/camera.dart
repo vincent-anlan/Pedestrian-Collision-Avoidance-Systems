@@ -1,14 +1,19 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 
 import 'package:image/image.dart' as Ig;
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:tflite/tflite.dart';
 import 'dart:math' as math;
 import 'models.dart';
 import 'package:path/path.dart' show join;
+
+import 'services/image_converter.dart';
 
 typedef void Callback(List<dynamic> list, int h, int w);
 
@@ -16,9 +21,8 @@ class Camera extends StatefulWidget {
   final List<CameraDescription> cameras;
   final Callback setRecognitions;
   final String model;
-
-  Camera(this.cameras, this.model, this.setRecognitions);
-
+  final setController;
+  Camera(this.cameras, this.model, this.setRecognitions, this.setController);
   @override
   _CameraState createState() => new _CameraState();
 }
@@ -44,7 +48,7 @@ class _CameraState extends State<Camera> {
         }
         setState(() {});
         // Set controller
-
+        widget.setController(controller);
         controller.startImageStream((CameraImage img) {
           if (!isDetecting) {
             isDetecting = true;
@@ -61,11 +65,9 @@ class _CameraState extends State<Camera> {
             ).then((recognitions) {
               // int endTime = new DateTime.now().millisecondsSinceEpoch;
               // print("Detection took ${endTime - startTime}");
-              // if (endTime - startTime > 3000) {
-              //   takePicture();
-              // }
               widget.setRecognitions(recognitions, img.height, img.width);
-
+              final acc = Provider.of<double>(context);
+              if (acc.abs() >= 5) takePicture(context, img);
               isDetecting = false;
             });
           }
@@ -122,6 +124,13 @@ class _CameraState extends State<Camera> {
                 Ig.Image.fromBytes(plane.width, plane.height, plane.bytes), 270)
             .getBytes();
     }).toList();
+  }
+
+  void takePicture(BuildContext context, CameraImage img) {
+    compute(convertImagetoPng, img).then((list) async {
+      print('finish conversion');
+      ImageGallerySaver.saveImage(list);
+    });
   }
 
   // void takePicture() async {
