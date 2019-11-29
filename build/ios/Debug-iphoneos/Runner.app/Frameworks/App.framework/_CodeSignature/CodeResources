@@ -10,7 +10,7 @@
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		knAgaU2Fq3rBao5N6CClJp0S3k4=
+		jzytmfYcKf3mQRbccMQWuWZtPEU=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -19,6 +19,10 @@
 		<key>flutter_assets/LICENSE</key>
 		<data>
 		n0kwxhA2O/aiCOVlBAQbFkFYPpw=
+		</data>
+		<key>flutter_assets/assets/background.jpg</key>
+		<data>
+		fVCBSupMvX8HS3TMXVAgsbTcBU8=
 		</data>
 		<key>flutter_assets/assets/detect.tflite</key>
 		<data>
@@ -32,13 +36,9 @@
 		<data>
 		ZzbxEAZR+AXH5XMjJU3yvp1Fqv8=
 		</data>
-		<key>flutter_assets/assets/ssd_mobilenet.tflite</key>
+		<key>flutter_assets/assets/radar.png</key>
 		<data>
-		IM2QfaMpWpVzOJEUNqbCkCS6WKg=
-		</data>
-		<key>flutter_assets/assets/ssd_mobilenet.txt</key>
-		<data>
-		x10Getj/LeHoKPIWf+9+xbLx2io=
+		Wg9EC8MRkMbEWuC2XMRKl6K7qOI=
 		</data>
 		<key>flutter_assets/assets/warningSound.mp3</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		1AcxB+69NNMBtBJIJCPtN524+lI=
+		LThvSCRE2yCgxbSmWt1cv8jl5+g=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -71,7 +71,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			9kur2OYc/7T3evbYs3rniyoUzFAOZkemng3AGTtgIAk=
+			N8XsSeie5zl7TOCholmS55yllRFZRfPgksaVzK/gWA8=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -86,6 +86,13 @@
 			<key>hash2</key>
 			<data>
 			1fCO2dhksFrN9XA7VyZ6M5386NecoAK5HTZeeAYWmxE=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/background.jpg</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			g24RF6oZ08mLOpAx1rmq2WJexeoh5YlMzowwJ4G57EI=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/detect.tflite</key>
@@ -109,18 +116,11 @@
 			0SBcQ9BWubfgrGJJ3PIHRR/DQp6zReKxk43HIebEZn8=
 			</data>
 		</dict>
-		<key>flutter_assets/assets/ssd_mobilenet.tflite</key>
+		<key>flutter_assets/assets/radar.png</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			5LEY5eRTGUXeLmWXQsfFkPdTb40O0m0TWrz+g7R3nRM=
-			</data>
-		</dict>
-		<key>flutter_assets/assets/ssd_mobilenet.txt</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			x+echV9zy7qfM9ZJ1g4WdusKl0AhpBaW0awNS39+AhE=
+			Osec/8pwZjjr4qhuvIZsAqWAMYZYin6EQQwMFeOVV4w=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/warningSound.mp3</key>
@@ -148,7 +148,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			oYx2LPp8jIUlwNfTf25zTLxIUD7HGAVikYkn+/uR2Jo=
+			ykfKQuvLVFqoPCOhWwVVYvplfzTbA20ruFRj7/mwg18=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>

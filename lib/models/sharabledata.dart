@@ -6,5 +6,6 @@ class SharableData {
   String cacheLimit = "";
   bool isCAMSwitched = true;
   double sliderValue = 0.0;
+  DateTime last = DateTime.now();
   SharableData();
 }

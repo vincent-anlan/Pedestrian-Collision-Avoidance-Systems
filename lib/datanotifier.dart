@@ -16,8 +16,12 @@ class DataNotifier extends ValueNotifier<SharableData> {
     value.color = color;
     notifyListeners();
     if (color == Colors.red) {
-      player.clearCache();
-      player.play('warningSound.mp3');
+      DateTime now = DateTime.now();
+      if(now.millisecondsSinceEpoch - value.last.millisecondsSinceEpoch > 2000){
+        value.last = now;
+        player.clearCache();
+        player.play('warningSound.mp3');
+      }
     }
   }
 

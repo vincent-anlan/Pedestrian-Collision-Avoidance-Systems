@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:road_hackers/datanotifier.dart';
+import 'package:road_hackers/detectpage.dart';
 import 'models/sharabledata.dart';
 
 class HomePage extends StatefulWidget {
@@ -97,14 +98,28 @@ class _HomePageState extends State<HomePage> {
       body: Container(
           child: Center(
               child: Column(mainAxisSize: MainAxisSize.min, children: [
-        IconButton(
-          icon: Icon(Icons.directions_car),
-          onPressed: () {
+        // IconButton(
+        //   icon: Icon(Icons.directions_car),
+        //   onPressed: () {
+        //     Navigator.pushNamed(context, '/detect');
+        //   },
+        //   iconSize: 50.0,
+        // ),
+        InkWell(
+          child: Ink.image(
+            image: AssetImage('assets/radar.png'),
+            fit: BoxFit.cover,
+            width: 100.0,
+            height: 100.0,
+          ),
+          onTap: (){
             Navigator.pushNamed(context, '/detect');
-          },
-          iconSize: 50.0,
+          }
         ),
-        Text('DETECT!')
+        Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Text('DETECT!'),
+        )
       ]))),
     );
   }
