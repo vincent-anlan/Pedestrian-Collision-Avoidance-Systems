@@ -1,17 +1,13 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 
 import 'package:image/image.dart' as Ig;
 import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:tflite/tflite.dart';
 import 'dart:math' as math;
-import 'models.dart';
-import 'package:path/path.dart' show join;
 
 import 'services/image_converter.dart';
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:road_hackers/datanotifier.dart';
-import 'package:road_hackers/detectpage.dart';
 import 'models/sharabledata.dart';
+import 'services/datanotifier.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -116,7 +115,7 @@ class _HomePageState extends State<HomePage> {
             }),
         Padding(
           padding: const EdgeInsets.all(15.0),
-          child: Text('DETECT!'),
+          child: Text('DETECT!', style: TextStyle(fontWeight: FontWeight.bold)),
         )
       ]))),
     );

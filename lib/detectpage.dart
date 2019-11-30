@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:provider/provider.dart';
-import 'package:road_hackers/datanotifier.dart';
 import 'package:tflite/tflite.dart';
 import 'dart:math' as math;
 
@@ -14,6 +13,7 @@ import 'bndbox.dart';
 import 'models/sharabledata.dart';
 import 'models/user_location.dart';
 import 'services/acceleration_service.dart';
+import 'services/datanotifier.dart';
 import 'services/location_service.dart';
 
 class DetectPage extends StatefulWidget {

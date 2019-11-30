@@ -1,6 +1,6 @@
 import 'package:audioplayers/audio_cache.dart';
 import 'package:flutter/material.dart';
-import 'models/sharabledata.dart';
+import 'package:road_hackers/models/sharabledata.dart';
 
 class DataNotifier extends ValueNotifier<SharableData> {
   static AudioCache player = AudioCache();
@@ -17,7 +17,8 @@ class DataNotifier extends ValueNotifier<SharableData> {
     notifyListeners();
     if (color == Colors.red) {
       DateTime now = DateTime.now();
-      if(now.millisecondsSinceEpoch - value.last.millisecondsSinceEpoch > 2000){
+      if (now.millisecondsSinceEpoch - value.last.millisecondsSinceEpoch >
+          2000) {
         value.last = now;
         player.clearCache();
         player.play('warningSound.mp3');

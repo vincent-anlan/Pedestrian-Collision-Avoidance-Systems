@@ -9,7 +9,6 @@ enum WarnColor { red, green, yellow }
 
 Future<LocationData> gps() async {
   LocationData currentLocation;
-  String error;
   var location = new Location();
 
 // Platform messages may fail, so we use a try/catch PlatformException.

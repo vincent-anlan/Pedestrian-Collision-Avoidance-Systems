@@ -24,10 +24,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        // home: HomePage(),
         home: HomePage(),
         routes: {
-          // '/': (context) => HomePage(),
           '/detect': (context) => DetectPage(cameras),
           '/video': (context) => VideoPage(),
         },
