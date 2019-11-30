@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:road_hackers/gallery.dart';
 import 'homepage.dart';
 import 'detectpage.dart';
-import 'videopage.dart';
 import 'package:camera/camera.dart';
 
 List<CameraDescription> cameras;
@@ -24,12 +24,10 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        // home: HomePage(),
         home: HomePage(),
         routes: {
-          // '/': (context) => HomePage(),
           '/detect': (context) => DetectPage(cameras),
-          '/video': (context) => VideoPage(),
+          '/gallery': (context) => Gallery(),
         },
         debugShowCheckedModeBanner: false);
   }
