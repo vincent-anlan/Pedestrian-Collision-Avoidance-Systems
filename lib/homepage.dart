@@ -96,29 +96,29 @@ class _HomePageState extends State<HomePage> {
             ),
           ]),
       body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/background.jpg"),
-              fit: BoxFit.fill,
-            ),
-          ),
+          // decoration: BoxDecoration(
+          //   image: DecorationImage(
+          //     image: AssetImage("assets/background.jpg"),
+          //     fit: BoxFit.fill,
+          //   ),
+          // ),
           child: Center(
               child: Column(mainAxisSize: MainAxisSize.min, children: [
-            InkWell(
-                child: Ink.image(
-                  image: AssetImage('assets/radar.png'),
-                  fit: BoxFit.cover,
-                  width: 100.0,
-                  height: 100.0,
-                ),
-                onTap: () {
-                  Navigator.pushNamed(context, '/detect');
-                }),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Text('DETECT!'),
-            )
-          ]))),
+        InkWell(
+            child: Ink.image(
+              image: AssetImage('assets/radar.png'),
+              fit: BoxFit.cover,
+              width: 100.0,
+              height: 100.0,
+            ),
+            onTap: () {
+              Navigator.pushNamed(context, '/detect');
+            }),
+        Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Text('DETECT!'),
+        )
+      ]))),
     );
   }
 }
