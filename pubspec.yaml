@@ -20,8 +20,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-  video_player:
-
   camera: ^0.5.6+3
 
   audioplayers: ^0.13.1
@@ -42,6 +40,7 @@ dependencies:
 
   image_gallery_saver:
 
+  photo_album_manager:
 
 dev_dependencies:
   flutter_test:

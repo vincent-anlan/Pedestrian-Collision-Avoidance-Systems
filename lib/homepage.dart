@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
             IconButton(
               icon: Icon(Icons.ondemand_video),
               onPressed: () {
-                Navigator.pushNamed(context, '/video');
+                Navigator.pushNamed(context, '/gallery');
               },
             ),
           ]),
