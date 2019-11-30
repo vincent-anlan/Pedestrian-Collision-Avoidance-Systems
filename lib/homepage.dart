@@ -11,9 +11,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   DataNotifier notifier = DataNotifier(SharableData());
-  String cacheLimit = "";
-  bool isCAMSwitched = true;
-  double _sliderValue = 0.0;
+  double _numObjectsPerFrame = 6.0;
+  bool isModelswitched = true;
+  double _sliderValue = 1.0;
+  double _modelAccrucy = 1.0;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,8 @@ class _HomePageState extends State<HomePage> {
                 child: Slider(
                   activeColor: Colors.indigoAccent,
                   min: 0.0,
-                  max: 15.0,
+                  max: 2.0,
+                  divisions: 2,
                   onChanged: (newRating) {
                     setState(() => _sliderValue = newRating);
                     notifier.changeSliderValue(newRating);
@@ -46,33 +48,36 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             ListTile(
-                title: Text('CACHE LIMIT (MB)'),
-                trailing: SizedBox(
-                  width: 100,
-                  child: TextField(
-                    decoration:
-                        new InputDecoration.collapsed(hintText: cacheLimit),
-                    keyboardType: TextInputType.number,
-                    onChanged: (text) {
-                      cacheLimit = text;
-                      notifier.changeCacheLimite(text);
-                    },
-                  ),
-                )),
-            ListTile(
-              title: Text('DASH CAM'),
+              title: Text('OBJECTS PER FRAME'),
               trailing: SizedBox(
                 width: 100,
-                child: Switch(
-                  value: isCAMSwitched,
-                  onChanged: (value) {
-                    setState(() {
-                      isCAMSwitched = value;
-                      notifier.changeisCAMSwitched(value);
-                    });
+                child: Slider(
+                  activeColor: Colors.indigoAccent,
+                  min: 5.0,
+                  max: 10.0,
+                  divisions: 6,
+                  onChanged: (newRating) {
+                    setState(() => _numObjectsPerFrame = newRating);
+                    notifier.changeNumObjectsPerFrame(newRating);
                   },
-                  activeTrackColor: Colors.lightBlueAccent,
-                  activeColor: Colors.blue,
+                  value: _numObjectsPerFrame,
+                ),
+              ),
+            ),
+            ListTile(
+              title: Text('MODEL ACCURACY'),
+              trailing: SizedBox(
+                width: 100,
+                child: Slider(
+                  activeColor: Colors.indigoAccent,
+                  min: 0.0,
+                  max: 1.0,
+                  divisions: 1,
+                  onChanged: (newRating) {
+                    setState(() => _modelAccrucy = newRating);
+                    notifier.changeModleAccuracy(newRating);
+                  },
+                  value: _modelAccrucy,
                 ),
               ),
             ),

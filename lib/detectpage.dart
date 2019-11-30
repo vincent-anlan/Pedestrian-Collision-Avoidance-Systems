@@ -72,7 +72,7 @@ class _DetectPageState extends State<DetectPage> {
       child: Scaffold(
         body: Stack(
           children: [
-            Camera(widget.cameras, _model, setRecognitions, setController),
+            Camera(widget.cameras, _model, setRecognitions, setController, _text),
             BndBox(
               _recognitions == null ? [] : _recognitions,
               math.min(_imageHeight, _imageWidth),
