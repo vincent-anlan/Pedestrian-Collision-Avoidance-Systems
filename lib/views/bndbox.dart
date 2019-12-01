@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:math' as math;
 import 'package:flutter/foundation.dart';
+import 'package:road_hackers/models/ssd_models.dart';
+import 'package:road_hackers/models/user_location.dart';
 import 'package:road_hackers/services/datanotifier.dart';
-
-import 'models/ssd_models.dart';
-import 'models/user_location.dart';
-import 'services/distance.dart';
-import 'services/sensor.dart';
+import 'package:road_hackers/services/distance.dart';
+import 'package:road_hackers/services/sensor.dart';
 
 class BndBox extends StatelessWidget {
   List<dynamic> results;

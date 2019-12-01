@@ -7,10 +7,9 @@ import 'package:image/image.dart' as Ig;
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:provider/provider.dart';
 import 'package:road_hackers/services/datanotifier.dart';
+import 'package:road_hackers/services/image_converter.dart';
 import 'package:tflite/tflite.dart';
 import 'dart:math' as math;
-
-import 'services/image_converter.dart';
 
 typedef void Callback(List<dynamic> list, int h, int w);
 
@@ -36,8 +35,8 @@ class _CameraState extends State<Camera> {
   void initState() {
     super.initState();
     int objectsPerFrame = widget._text.value.cacheLimit.round();
-    int sensitivity = widget._text.value.sliderValue.round();
-    int modleAccuracy = widget._text.getModleAccuracy().round();
+    double sensitivity = (0.45 + (widget._text.value.sliderValue - 1) * 0.05);
+    // int modleAccuracy = widget._text.getModleAccuracy().round();
 
     print("sensitivity: " + sensitivity.toString());
     print("threshold: " + (0.45 + (sensitivity - 1) * 0.05).toString());
@@ -69,8 +68,8 @@ class _CameraState extends State<Camera> {
               imageWidth: img.height,
               imageMean: 128,
               imageStd: 127,
-              numResultsPerClass: 6,
-              threshold: 0.45,
+              numResultsPerClass: objectsPerFrame,
+              threshold: sensitivity,
             ).then((recognitions) {
               // int endTime = new DateTime.now().millisecondsSinceEpoch;
               // print("Detection took ${endTime - startTime}");

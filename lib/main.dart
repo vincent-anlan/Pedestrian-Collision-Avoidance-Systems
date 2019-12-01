@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:road_hackers/gallery.dart';
-import 'homepage.dart';
-import 'detectpage.dart';
+
 import 'package:camera/camera.dart';
+import 'package:road_hackers/views/detectpage.dart';
+import 'package:road_hackers/views/gallery.dart';
+import 'package:road_hackers/views/homepage.dart';
 
 List<CameraDescription> cameras;
 

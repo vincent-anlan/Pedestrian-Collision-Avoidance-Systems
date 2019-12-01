@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:photo_album_manager/photo_album_manager.dart';
-import 'package:road_hackers/photo_detail.dart';
+import 'package:road_hackers/views/photo_detail.dart';
 
 class Gallery extends StatefulWidget {
   Gallery({Key key}) : super(key: key);

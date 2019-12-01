@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:provider/provider.dart';
+import 'package:road_hackers/models/sharabledata.dart';
+import 'package:road_hackers/models/user_location.dart';
+import 'package:road_hackers/services/acceleration_service.dart';
+import 'package:road_hackers/services/datanotifier.dart';
+import 'package:road_hackers/services/location_service.dart';
 import 'package:tflite/tflite.dart';
 import 'dart:math' as math;
 
 import 'camera.dart';
 import 'bndbox.dart';
-
-import 'models/sharabledata.dart';
-import 'models/user_location.dart';
-import 'services/acceleration_service.dart';
-import 'services/datanotifier.dart';
-import 'services/location_service.dart';
 
 class DetectPage extends StatefulWidget {
   final List<CameraDescription> cameras;
