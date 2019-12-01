@@ -1,3 +1,3 @@
 # Pedestrian-Collision-Avoidance-Systems
 
-Team Project 1
+CS493 Team Project 1

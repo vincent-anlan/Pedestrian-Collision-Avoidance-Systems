@@ -26,19 +26,31 @@ class DataNotifier extends ValueNotifier<SharableData> {
     }
   }
 
-  void changeCacheLimite(String cacheLimit) {
+  void changeNumObjectsPerFrame(double cacheLimit) {
     value.cacheLimit = cacheLimit;
     notifyListeners();
   }
 
-  void changeisCAMSwitched(bool isCAMSwitched) {
-    value.isCAMSwitched = isCAMSwitched;
+  void changeModleAccuracy(double modelAccuracy) {
+    value.modelAccuracy = modelAccuracy;
     notifyListeners();
   }
 
   void changeSliderValue(double sliderValue) {
     value.sliderValue = sliderValue;
     notifyListeners();
+  }
+
+  double getNumObjectsPerFrame() {
+    return value.cacheLimit;
+  }
+
+  double getModleAccuracy() {
+    return value.modelAccuracy;
+  }
+
+  double getSliderValue() {
+    return value.sliderValue;
   }
 
   // void changeControlValue(controller){

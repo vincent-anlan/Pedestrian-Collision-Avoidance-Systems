@@ -6,6 +6,7 @@ import 'package:camera/camera.dart';
 import 'package:image/image.dart' as Ig;
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:provider/provider.dart';
+import 'package:road_hackers/datanotifier.dart';
 import 'package:tflite/tflite.dart';
 import 'dart:math' as math;
 
@@ -18,7 +19,8 @@ class Camera extends StatefulWidget {
   final Callback setRecognitions;
   final String model;
   final setController;
-  Camera(this.cameras, this.model, this.setRecognitions, this.setController);
+  final DataNotifier _text;
+  Camera(this.cameras, this.model, this.setRecognitions, this.setController, this._text);
   @override
   _CameraState createState() => new _CameraState();
 }
@@ -30,6 +32,13 @@ class _CameraState extends State<Camera> {
   @override
   void initState() {
     super.initState();
+      int objectsPerFrame = widget._text.value.cacheLimit.round();
+      int sensitivity = widget._text.value.sliderValue.round();
+      int modleAccuracy = widget._text.getModleAccuracy().round();
+
+      print("sensitivity: " + sensitivity.toString());
+      print("threshold: " + (0.45 + (sensitivity - 1) * 0.05).toString());
+      print("objectsPerFrame: " + objectsPerFrame.toString());
 
     if (widget.cameras == null || widget.cameras.length < 1) {
       print('No camera is found');
@@ -56,8 +65,8 @@ class _CameraState extends State<Camera> {
               imageWidth: img.height,
               imageMean: 128,
               imageStd: 127,
-              numResultsPerClass: 6,
-              threshold: 0.45,
+              numResultsPerClass: objectsPerFrame,
+              threshold: 0.45 + (sensitivity - 2) * 0.5,
             ).then((recognitions) {
               // int endTime = new DateTime.now().millisecondsSinceEpoch;
               // print("Detection took ${endTime - startTime}");
