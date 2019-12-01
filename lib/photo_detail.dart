@@ -15,10 +15,17 @@ class _PhotoState extends State<Photo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Hero(
-          tag: widget.value.localIdentifier,
-          child:
-              Image.file(File(widget.value.originalPath), fit: BoxFit.contain)),
+      body: Center(
+        child: Hero(
+            tag: widget.value.localIdentifier,
+            child: RotatedBox(
+                quarterTurns: 3,
+                child: OverflowBox(
+                    maxHeight: 1125,
+                    maxWidth: 2436,
+                    child: Image.file(File(widget.value.originalPath),
+                        fit: BoxFit.fitWidth)))),
+      ),
     );
   }
 }

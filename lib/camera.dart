@@ -14,6 +14,8 @@ import 'services/image_converter.dart';
 
 typedef void Callback(List<dynamic> list, int h, int w);
 
+var rotated;
+
 class Camera extends StatefulWidget {
   final List<CameraDescription> cameras;
   final Callback setRecognitions;
@@ -59,21 +61,23 @@ class _CameraState extends State<Camera> {
           if (!isDetecting) {
             isDetecting = true;
             // int startTime = new DateTime.now().millisecondsSinceEpoch;
+            rotated = dealImage(img.planes);
             Tflite.detectObjectOnFrame(
-              bytesList: dealImage(img.planes),
+              bytesList: rotated,
               model: "SSDMobileNet",
               imageHeight: img.width,
               imageWidth: img.height,
               imageMean: 128,
               imageStd: 127,
-              numResultsPerClass: objectsPerFrame,
-              threshold: 0.45 + (sensitivity - 2) * 0.5,
+              numResultsPerClass: 6,
+              threshold: 0.45,
             ).then((recognitions) {
               // int endTime = new DateTime.now().millisecondsSinceEpoch;
               // print("Detection took ${endTime - startTime}");
               widget.setRecognitions(recognitions, img.height, img.width);
               final acc = Provider.of<double>(context);
-              if (acc.abs() >= 5) takePicture(context, img);
+              // if (acc.abs() >= 5 ) takePicture(context, img);
+              if (acc.abs() >= 3 && widget._text.isWarning()) takePicture(img);
               isDetecting = false;
             });
           }
@@ -130,8 +134,8 @@ class _CameraState extends State<Camera> {
     }).toList();
   }
 
-  void takePicture(BuildContext context, CameraImage img) {
-    convertImagetoPng(img).then((list) async {
+  void takePicture(CameraImage img) {
+    convertImagetoPng(img).then((list) {
       ImageGallerySaver.saveImage(list);
     });
   }

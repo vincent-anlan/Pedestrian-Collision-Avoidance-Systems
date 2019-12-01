@@ -94,9 +94,7 @@ class _HomePageState extends State<HomePage> {
           actions: [
             IconButton(
               icon: Icon(Icons.ondemand_video),
-              onPressed: () {
-                Navigator.pushNamed(context, '/gallery');
-              },
+              onPressed: () => Navigator.pushNamed(context, '/gallery'),
             ),
           ]),
       body: Container(

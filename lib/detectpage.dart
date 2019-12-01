@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:provider/provider.dart';
 import 'package:tflite/tflite.dart';
 import 'dart:math' as math;
@@ -72,7 +69,8 @@ class _DetectPageState extends State<DetectPage> {
       child: Scaffold(
         body: Stack(
           children: [
-            Camera(widget.cameras, _model, setRecognitions, setController, _text),
+            Camera(
+                widget.cameras, _model, setRecognitions, setController, _text),
             BndBox(
               _recognitions == null ? [] : _recognitions,
               math.min(_imageHeight, _imageWidth),
@@ -113,7 +111,7 @@ class _DetectPageState extends State<DetectPage> {
 
   loadModel() async {
     await Tflite.loadModel(
-        model: "assets/detect.tflite", labels: "assets/detect.txt");
+        model: "assets/new_detect.tflite", labels: "assets/detect.txt");
     // await Tflite.loadModel(
     //     model: "assets/ssd_mobilenet.tflite",
     //     labels: "assets/ssd_mobilenet.txt");

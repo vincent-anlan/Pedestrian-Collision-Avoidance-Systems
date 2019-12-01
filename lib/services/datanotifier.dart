@@ -53,6 +53,10 @@ class DataNotifier extends ValueNotifier<SharableData> {
     return value.sliderValue;
   }
 
+  bool isWarning() {
+    return value.color == Colors.red;
+  }
+
   // void changeControlValue(controller){
   //   value.controller = controller;
   // }
