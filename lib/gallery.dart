@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:photo_album_manager/photo_album_manager.dart';
+import 'package:road_hackers/photo_detail.dart';
 
 class Gallery extends StatefulWidget {
   Gallery({Key key}) : super(key: key);
@@ -47,9 +48,12 @@ class _GalleryState extends State<Gallery> {
                 children: <Widget>[
                   ConstrainedBox(
                     constraints: BoxConstraints.expand(),
-                    child: Image.file(
-                      File(model.thumbPath ?? model.originalPath),
-                      fit: BoxFit.cover,
+                    child: Hero(
+                      tag: model.localIdentifier,
+                      child: Image.file(
+                        File(model.thumbPath ?? model.originalPath),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   Offstage(
@@ -69,6 +73,10 @@ class _GalleryState extends State<Gallery> {
                 print("下载错误" + error);
               }).then((value) {
                 print("下载完成" + value.originalPath);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Photo(value: value)));
               });
             },
           );

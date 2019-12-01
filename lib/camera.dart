@@ -109,8 +109,6 @@ class _CameraState extends State<Camera> {
 
   dealImage(List<Plane> planes) {
     return planes.map((plane) {
-      // print(Ig.copyRotate(Ig.Image.fromBytes(1080, 720, plane.bytes), 90)
-      //     .getBytes());
       if (Platform.isAndroid)
         return Ig.copyRotate(
                 Ig.Image.fromBytes(plane.width, plane.height, plane.bytes), 0)
@@ -123,22 +121,8 @@ class _CameraState extends State<Camera> {
   }
 
   void takePicture(BuildContext context, CameraImage img) {
-    // compute(convertImagetoPng, img).then((list) async {
-    //   print('finish conversion');
-    //   ImageGallerySaver.saveImage(list);
-    // });
     convertImagetoPng(img).then((list) async {
       ImageGallerySaver.saveImage(list);
     });
   }
-
-  // void takePicture() async {
-  //   final path = join(
-  //     // Store the picture in the temp directory.
-  //     // Find the temp directory using the `path_provider` plugin.
-  //     (await getTemporaryDirectory()).path,
-  //     '${DateTime.now()}.png',
-  //   );
-  //   controller.takePicture(path);
-  // }
 }
