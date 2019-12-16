@@ -14,8 +14,8 @@ import 'bndbox.dart';
 
 class DetectPage extends StatefulWidget {
   final List<CameraDescription> cameras;
-
-  DetectPage(this.cameras);
+  final DataNotifier _text;
+  DetectPage(this.cameras, this._text);
 
   @override
   _DetectPageState createState() => new _DetectPageState();
@@ -26,7 +26,6 @@ class _DetectPageState extends State<DetectPage> {
   int _imageHeight = 0;
   int _imageWidth = 0;
   String _model = "";
-  final DataNotifier _text = DataNotifier(SharableData());
   CameraController _controller;
 
   // DetectionNotifier(SharableData("No people detected!", Colors.black));
@@ -35,8 +34,8 @@ class _DetectPageState extends State<DetectPage> {
   void initState() {
     super.initState();
     loadModel();
-    _text.changeDectionMsg("No object detected!");
-    _text.changeDectionColor(Colors.green);
+    widget._text.changeDectionMsg("No object detected!");
+    widget._text.changeDectionColor(Colors.green);
     // print("Speed:" + getSpeed().toString());
   }
 
@@ -68,8 +67,8 @@ class _DetectPageState extends State<DetectPage> {
       child: Scaffold(
         body: Stack(
           children: [
-            Camera(
-                widget.cameras, _model, setRecognitions, setController, _text),
+            Camera(widget.cameras, _model, setRecognitions, setController,
+                widget._text),
             BndBox(
               _recognitions == null ? [] : _recognitions,
               math.min(_imageHeight, _imageWidth),
@@ -77,7 +76,7 @@ class _DetectPageState extends State<DetectPage> {
               screen.height,
               screen.width,
               _model,
-              _text,
+              widget._text,
             ),
             new Positioned(
               child: new Align(
@@ -99,7 +98,7 @@ class _DetectPageState extends State<DetectPage> {
                             new EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 16.0),
                       );
                     },
-                    valueListenable: _text,
+                    valueListenable: widget._text,
                   )),
             ),
           ],
@@ -109,8 +108,11 @@ class _DetectPageState extends State<DetectPage> {
   }
 
   loadModel() async {
+    final model =
+        (widget._text.getModleAccuracy() == 0.0 ? 'detect' : 'new_detect');
+    print(model);
     await Tflite.loadModel(
-        model: "assets/new_detect.tflite", labels: "assets/detect.txt");
+        model: "assets/$model.tflite", labels: "assets/detect.txt");
     // await Tflite.loadModel(
     //     model: "assets/ssd_mobilenet.tflite",
     //     labels: "assets/ssd_mobilenet.txt");

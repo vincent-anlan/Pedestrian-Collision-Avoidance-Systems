@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:road_hackers/models/sharabledata.dart';
 import 'package:road_hackers/services/datanotifier.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key}) : super(key: key);
-
-  _HomePageState createState() => _HomePageState();
+  HomePage(this.notifier);
+  DataNotifier notifier;
+  _HomePageState createState() => _HomePageState(notifier);
 }
 
 class _HomePageState extends State<HomePage> {
-  DataNotifier notifier = DataNotifier(SharableData());
+  DataNotifier notifier;
   double _numObjectsPerFrame = 6.0;
   bool isModelswitched = true;
   double _sliderValue = 1.0;
   double _modelAccuracy = 1.0;
+
+  _HomePageState(this.notifier);
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +79,9 @@ class _HomePageState extends State<HomePage> {
               ),
               ListTile(
                 leading: Text('MODEL ACCURACY'),
-                subtitle: Center(child: Text('${_modelAccuracy==0.0?"high speed":"high performance"}')),
+                subtitle: Center(
+                    child: Text(
+                        '${_modelAccuracy == 0.0 ? "high speed" : "high performance"}')),
                 title: SizedBox(
                   width: 150,
                   child: Slider(

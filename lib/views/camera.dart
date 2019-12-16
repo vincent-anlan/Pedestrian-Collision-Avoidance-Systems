@@ -39,7 +39,6 @@ class _CameraState extends State<Camera> {
     // int modleAccuracy = widget._text.getModleAccuracy().round();
 
     print("sensitivity: " + sensitivity.toString());
-    print("threshold: " + (0.45 + (sensitivity - 1) * 0.05).toString());
     print("objectsPerFrame: " + objectsPerFrame.toString());
 
     if (widget.cameras == null || widget.cameras.length < 1) {

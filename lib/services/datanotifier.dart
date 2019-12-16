@@ -28,17 +28,14 @@ class DataNotifier extends ValueNotifier<SharableData> {
 
   void changeNumObjectsPerFrame(double cacheLimit) {
     value.cacheLimit = cacheLimit;
-    notifyListeners();
   }
 
   void changeModleAccuracy(double modelAccuracy) {
     value.modelAccuracy = modelAccuracy;
-    notifyListeners();
   }
 
   void changeSliderValue(double sliderValue) {
     value.sliderValue = sliderValue;
-    notifyListeners();
   }
 
   double getNumObjectsPerFrame() {
